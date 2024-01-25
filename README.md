@@ -1,4 +1,4 @@
-# 代码分析文档
+# Development of detailed records
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -6,7 +6,7 @@
 - [Introduction to CVA6](#introduction-to-cva6)
 - [Code analysis](#code-analysis)
   - [core](#core)
-    - [frontend](#frontend-前端)
+    - [frontend](#frontend)
     - [cache_subsystem](#cache_subsystem)
   - [sw](#sw)
 
@@ -16,9 +16,9 @@ Accelerating AI applications on a RISC-V processor
 The works of Dragon core
 
 ## Team Members
-Liu Jingze  
-Zhang Yalei  
-Sun Yongxin  
+- Liu Jingze  
+- Zhang Yalei  
+- Sun Yongxin  
 
 ## Introduction to CVA6
 CVA6 is a high-performance processor design that supports out-of-order and in-order execution. It is capable of handling advanced features such as branch prediction, instruction reordering, exception handling, and virtual memory support.
