@@ -16,9 +16,9 @@ Accelerating AI applications on a RISC-V processor
 The works of Dragon core
 
 ## Team Members
-Liu Jingze
-Zhang Yalei
-Sun Yongxin
+Liu Jingze  
+Zhang Yalei  
+Sun Yongxin  
 
 ## Introduction to CVA6
 CVA6 is a high-performance processor design that supports out-of-order and in-order execution. It is capable of handling advanced features such as branch prediction, instruction reordering, exception handling, and virtual memory support.
@@ -28,34 +28,29 @@ CVA6 is a high-performance processor design that supports out-of-order and in-or
 ## Code Analysis
 
 ### core
-在这里，详细描述文件夹core的代码实现和功能。例如：
+The code implementation and functionalities of the folder 'core' are described in detail.
 
-#### frontend 前端
+#### frontend 
 ![RISC-V流水线](images/image2.jpeg "流水线")
 
-- frontend文件夹是前端与译码阶段（Instruction Decode (ID)）
-- bht.sv：分支历史表（Branch History Table, BHT）
-- btb.sv：分支目标缓冲器（Branch Target Buffer, BTB）
-两个部分用于分支预测
-- instr_scan.sv：负责扫描、识别和处理即将进入译码阶段的指令。
-- instr_queue.sv：指令队列（Instruction Queue）存储待处理的指令。
-- fronted.sv：模块的接口定义和内部一些子模块的实例化。
+- The frontend folder is related to the Front End and Instruction Decode (ID) stages.
+- bht.sv: Branch History Table (BHT), a part of branch prediction.
+- btb.sv: Branch Target Buffer (BTB), another part of branch prediction.
+- instr_scan.sv: Responsible for scanning, identifying, and handling instructions entering the decode phase.
+- instr_queue.sv: Instruction Queue stores instructions waiting to be processed.
+- fronted.sv: Defines the module interface and instances of some internal submodules.
 
 #### cache_subsystem
 ![RISC-V流水线](images/image3.jpeg "流水线")
 
-- Cache_subsystem 部分是处理器的缓存子系统，这部分是负责管理和提供 CPU 快速访问数据的组件。这个缓存子系统通常包括指令缓存（I-Cache）和数据缓存（D-Cache），它们分别缓存指令和数据，以减少处理器访问主内存的次数，从而提高效率。
-- wt_dcache_ctrl.sv：DS Controller 控制数据缓存的逻辑，包括处理缓存一致性、读写请求等。
-- wt_dcache_mem.sv：DS Mem 这部分代表数据缓存的内存接口，负责管理数据缓存与主内存或其他缓存级别之间的数据交换。
-- wt_dcache_missunit.sv：DS Miss Unit 当处理器尝试从数据缓存中读取数据但未命中时，缺失单元会处理这个缺失，可能需要从主内存或更低级别的缓存中拉取数据。
-- wt_dcache_wbuffer.sv：DS Buffer 缓冲区，用于优化数据写操作。在缓存无法立即写入时，数据可能首先写入这个缓冲区。
-- wt_dcache.sv：
-- wt_dcache_subsystem.sv：指令和数据缓存的管理逻辑，以及与内存接口的适配器逻辑。通过参数化设计，它能够适配不同的配置和内存系统接口。
+- The cache_subsystem part is the processor's cache subsystem, managing and providing fast data access to the CPU. It usually includes the Instruction Cache (I-Cache) and Data Cache (D-Cache) for caching instructions and data, respectively, reducing the number of times the processor accesses the main memory, thus improving efficiency.
+- wt_dcache_ctrl.sv: DS Controller controls the data cache logic, including cache coherence, read/write requests, etc.
+- wt_dcache_mem.sv: DS Mem represents the memory interface of the data cache, managing data exchanges between the data cache and main memory or other cache levels.
+- wt_dcache_missunit.sv: DS Miss Unit handles misses when the processor tries to read data from the data cache but does not find it, possibly requiring fetching data from the main memory or a lower cache level.
+- wt_dcache_wbuffer.sv: DS Buffer, a buffer used to optimize data write operations. Data may be written first into this buffer when it can't be written to the cache immediately.
+- wt_dcache.sv:
+- wt_dcache_subsystem.sv: Manages the logic of instruction and data cache and the adapter logic to the memory interface. With a parametric design, it can adapt to different configurations and memory system interfaces.
 
 
 ### sw
-
-同上，对组件2进行详细描述。
-
-
 

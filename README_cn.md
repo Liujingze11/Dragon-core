@@ -18,7 +18,6 @@ CVA6 是一个高性能的处理器设计，支持乱序执行和规范化执行
 - [更多组件...](#更多组件)
 
 ## core
-
 在这里，详细描述文件夹core的代码实现和功能。例如：
 
 ### frontend 前端
@@ -31,7 +30,6 @@ CVA6 是一个高性能的处理器设计，支持乱序执行和规范化执行
 - instr_scan.sv：负责扫描、识别和处理即将进入译码阶段的指令。
 - instr_queue.sv：指令队列（Instruction Queue）存储待处理的指令。
 - fronted.sv：模块的接口定义和内部一些子模块的实例化。
-
 ### cache_subsystem
 ![RISC-V流水线](images/image3.jpeg "流水线")
 
@@ -42,7 +40,6 @@ CVA6 是一个高性能的处理器设计，支持乱序执行和规范化执行
 - wt_dcache_wbuffer.sv：DS Buffer 缓冲区，用于优化数据写操作。在缓存无法立即写入时，数据可能首先写入这个缓冲区。
 - wt_dcache.sv：
 - wt_dcache_subsystem.sv：指令和数据缓存的管理逻辑，以及与内存接口的适配器逻辑。通过参数化设计，它能够适配不同的配置和内存系统接口。
-
 
 ## sw
 
