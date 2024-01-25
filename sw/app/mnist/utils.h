@@ -17,7 +17,7 @@
     The fact that you are presently reading this means that you have had
     knowledge of the CeCILL-C license and that you accept its terms.
 */
-
+//定义了数据工具
 #ifndef N2D2_EXPORTC_UTILS_H
 #define N2D2_EXPORTC_UTILS_H
 

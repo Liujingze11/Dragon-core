@@ -18,7 +18,7 @@
     The fact that you are presently reading this means that you have had
     knowledge of the CeCILL-C license and that you accept its terms.
 */
-
+//码通过检查PGM文件格式、读取图像数据，并根据特定的位数要求处理这些数据。
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -30,7 +30,7 @@
 #include "typedefs.h"
 #include "utils.h"
 #include "env.h"
-
+//图片env003
 #if CHOOSE_INPUT_IMAGE == 3
 unsigned char env0003[] = {
     0x50, 0x35, 0x0a, 0x32, 0x34, 0x20, 0x32, 0x34, 0x0a, 0x32, 0x35, 0x35, 0x0a, 0x00, 0x00, 0x00,
@@ -71,7 +71,7 @@ unsigned char env0003[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00,
     0x00};
-#elif CHOOSE_INPUT_IMAGE == 4618
+#elif CHOOSE_INPUT_IMAGE == 4618//图片4618
 unsigned char env4618[] = {
     0x50, 0x35, 0x0a, 0x32, 0x34, 0x20, 0x32, 0x34, 0x0a, 0x32, 0x35, 0x35, 0x0a, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -114,7 +114,7 @@ unsigned char env4618[] = {
 #endif
 
 static int mnist_input_idx = 0;
-
+//函数负责从MNIST图像数据数组中读取数据
 static int read_mnist_input(void* dst, const size_t size, const size_t n) {
     if (mnist_input_idx+size*n <= sizeof(MNIST_INPUT_IMAGE)) {
         if (dst){
@@ -130,10 +130,14 @@ static int read_mnist_input(void* dst, const size_t size, const size_t n) {
         return -1;
     }
 }
-
+//函数检查是否已经到达数据数组的末尾
 static int feof_mnist_input() {
     return  mnist_input_idx == sizeof(MNIST_INPUT_IMAGE) ? 1 : 0;
 }
+
+//这个函数用于读取和处理MNIST图像数据。
+//它首先检查图像格式是否正确（即PGM格式）。
+//然后，它读取图像的维度和像素值，并根据需要对数据进行处理。
 
 void envRead(unsigned int size,
              unsigned int channelsHeight,
