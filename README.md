@@ -11,9 +11,9 @@
   - [sw](#sw)
 
 ## Project Overview
-4th national RISC-V student contest 2023-2024 in France
-Accelerating AI applications on a RISC-V processor
-The works of Dragon core
+- 4th national RISC-V student contest 2023-2024 in France
+- Accelerating AI applications on a RISC-V processor
+- The works of Dragon core
 
 ## Team Members
 - Liu Jingze  
