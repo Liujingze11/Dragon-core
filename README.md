@@ -7,8 +7,12 @@
 - [Code analysis](#code-analysis)
   - [core](#core)
     - [frontend](#frontend)
+    - [ID](#id)
+    - [Issue](#issue)
+    - [Excute](#excute)  
     - [cache_subsystem](#cache_subsystem)
   - [sw](#sw)
+    - [app](#app)
 
 ## Project Overview
 - 4th national RISC-V student contest 2023-2024 in France
@@ -32,14 +36,26 @@ The code implementation and functionalities of the folder 'core' are described i
 
 #### frontend 
 ![RISC-V流水线](images/image2.jpeg "流水线")
+- instr_realign.sv：Adjusts the instruction stream to ensure that instructions are aligned properly for decoding.  
 
-- The frontend folder is related to the Front End and Instruction Decode (ID) stages.
-- bht.sv: Branch History Table (BHT), a part of branch prediction.
-- btb.sv: Branch Target Buffer (BTB), another part of branch prediction.
+The frontend folder is related to the Front End and Instruction Decode (ID) stages.
+- bht.sv: BHT (Branch History Table) predicts the direction of branch instructions to enhance instruction flow.
 - ras.sv:The RAS (Return Address Stack) is a data structure used in processor design for storing and restoring return addresses of function calls.
+- btb.sv: BTB (Branch Target Buffer) caches the destination of recently executed branch instructions to speed up branch instruction execution.
 - instr_scan.sv: Responsible for scanning, identifying, and handling instructions entering the decode phase.
-- instr_queue.sv: Instruction Queue stores instructions waiting to be processed.
+- instr_queue.sv: Instruction Queue stores instructions waiting to be processed.Buffers instructions before they are issued to ensure a steady flow to the execution units.
 - fronted.sv: Defines the module interface and instances of some internal submodules.
+
+#### ID
+- compressed_decoder.sv:Decodes compressed instructions into their full-sized counterparts if the processor supports compressed instruction sets.
+- decoder.sv:Translates binary instruction codes into a set of control signals for the execution units.
+
+#### Issue
+- issue_read_operands.sv：The "Issue Read" stage dispatches ready instructions with their operands to the execution units.
+
+#### Excute
+- alu.sv:ALU (Arithmetic Logic Unit) performs arithmetic and logical operations.
+- csr_buffer.sv:Temporarily holds the results of CSR operations before they are written back to the registers.
 
 #### cache_subsystem
 ![RISC-V流水线](images/image3.jpeg "流水线")
@@ -51,12 +67,8 @@ The code implementation and functionalities of the folder 'core' are described i
 - wt_dcache_wbuffer.sv: DS Buffer, a buffer used to optimize data write operations. Data may be written first into this buffer when it can't be written to the cache immediately.
 - wt_dcache.sv:
 - wt_dcache_subsystem.sv: Manages the logic of instruction and data cache and the adapter logic to the memory interface. With a parametric design, it can adapt to different configurations and memory system interfaces.
-#### ID
 
 
-#### Excute
-
-alu.sv:
 ### sw
 #### app
 mnist：Information about neural networks.
