@@ -1,35 +1,35 @@
 # Development of detailed records
 
 ## Table of Contents
-- [1.Project Overview](#1project-overview)
-- [2.Team Members](#2team-members)
-- [3.Introduction to CVA6](#3introduction-to-cva6)
-- [4.Code Analysis](#4code-analysis)
+- [1. Project Overview](#1project-overview)
+- [2. Team Members](#2team-members)
+- [3. Introduction to CVA6](#3introduction-to-cva6)
+- [4. Code Analysis](#4code-analysis)
   - [4.1 core](#41-core)
     - [4.1.1 frontend ](#411-frontend)
     - [4.1.2 ID](#412-id)
     - [4.1.3 Issue](#413-issue)
     - [4.1.4 Excute](#414-excute)  
-    - [4.1.5 cache_subsystem](#415-cache_subsystem)
+    - [4.1.5 Commdit](#415-commdit)
+    - [4.1.6 cache_subsystem](#416-cache_subsystem)
   - [4.2 sw](#42-sw)
     - [4.2.1 app](#421-app)
 
-## 1.Project Overview
+## 1. Project Overview
 - 4th national RISC-V student contest 2023-2024 in France
 - Accelerating AI applications on a RISC-V processor
 - The works of Dragon core
 
-## 2.Team Members
+## 2. Team Members
 - Liu Jingze  
 - Zhang Yalei  
 - Sun Yongxin  
 
-## 3.Introduction to CVA6
+## 3. Introduction to CVA6
 CVA6 is a high-performance processor design that supports out-of-order and in-order execution. It is capable of handling advanced features such as branch prediction, instruction reordering, exception handling, and virtual memory support.
 ![RISC-V流水线](images/image1.png "流水线")
 
-
-## 4.Code Analysis
+## 4. Code Analysis
 
 ### 4.1 core
 The code implementation and functionalities of the folder 'core' are described in detail.
@@ -73,7 +73,7 @@ The frontend folder is related to the Front End and Instruction Decode (ID) stag
 
 #### 4.1.5 Commdit
 - commit_stage.sv：
-csr_regfile.sv:
+- csr_regfile.sv:
 - csr_buffer.sv:
 
 #### 4.1.6 cache_subsystem
@@ -87,7 +87,7 @@ csr_regfile.sv:
 - wt_dcache.sv:
 - wt_dcache_subsystem.sv: Manages the logic of instruction and data cache and the adapter logic to the memory interface. With a parametric design, it can adapt to different configurations and memory system interfaces.
 
-
 ### 4.2 sw
+
 #### 4.2.1 app
-mnist：Information about neural networks.
+- mnist：Information about neural networks.
