@@ -49,15 +49,34 @@ The frontend folder is related to the Front End and Instruction Decode (ID) stag
 #### 4.1.2 ID
 - compressed_decoder.sv:Decodes compressed instructions into their full-sized counterparts if the processor supports compressed instruction sets.
 - decoder.sv:Translates binary instruction codes into a set of control signals for the execution units.
+- controller.sv:
+- id_stage.sv：Represents the decode stage where instructions are interpreted and prepared for execution.
 
 #### 4.1.3 Issue
 - issue_read_operands.sv：The "Issue Read" stage dispatches ready instructions with their operands to the execution units.
+- scoreboard.sv:Tracks the status of instruction dependencies to ensure that instructions are issued only when their operands are ready.
+- issue_stage.sv：The stage where instructions are issued to the execution units if all operands are ready.
 
 #### 4.1.4 Excute
 - alu.sv:ALU (Arithmetic Logic Unit) performs arithmetic and logical operations.
 - csr_buffer.sv:Temporarily holds the results of CSR operations before they are written back to the registers.
+- fpu_wrap.sv:FPU (Floating Point Unit) performs floating-point operations.
+- mult.sv:Performs multiplication and division operations.
+- multiplier.sv:Performs multiplication and division operations.
+- branch_unit.sv:Determines the outcome of branch instructions and detects mispredictions.
+- ex_stage.sv:
+- load_unit.sv:
+- store_unit.sv:
+- load_store_unit.sv:
+- amo_buffer.sv:atomic memory operations.
+- cvxif_fu.sv:
 
-#### 4.1.5 cache_subsystem
+#### 4.1.5 Commdit
+- commit_stage.sv：
+csr_regfile.sv:
+- csr_buffer.sv:
+
+#### 4.1.6 cache_subsystem
 ![RISC-V流水线](images/image3.jpeg "流水线")
 
 - The cache_subsystem part is the processor's cache subsystem, managing and providing fast data access to the CPU. It usually includes the Instruction Cache (I-Cache) and Data Cache (D-Cache) for caching instructions and data, respectively, reducing the number of times the processor accesses the main memory, thus improving efficiency.
