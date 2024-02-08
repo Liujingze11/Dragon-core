@@ -1,93 +1,105 @@
-# Development of detailed records
+# 开发详细记录
 
-## Table of Contents
-- [1. Project Overview](#1project-overview)
-- [2. Team Members](#2team-members)
-- [3. Introduction to CVA6](#3introduction-to-cva6)
-- [4. Code Analysis](#4code-analysis)
-  - [4.1 core](#41-core)
-    - [4.1.1 frontend ](#411-frontend)
-    - [4.1.2 ID](#412-id)
-    - [4.1.3 Issue](#413-issue)
-    - [4.1.4 Excute](#414-excute)  
-    - [4.1.5 Commdit](#415-commdit)
-    - [4.1.6 cache_subsystem](#416-cache_subsystem)
-  - [4.2 sw](#42-sw)
-    - [4.2.1 app](#421-app)
+本文档详细记录了关于在RISC-V处理器上加速AI应用的项目开发过程。
 
-## 1. Project Overview
-- 4th national RISC-V student contest 2023-2024 in France
-- Accelerating AI applications on a RISC-V processor
-- The works of Dragon core
+## 目录
 
-## 2. Team Members
-- Liu Jingze  
-- Zhang Yalei  
-- Sun Yongxin  
+- [1. 项目概览](#1-项目概览)
+- [2. 团队成员](#2-团队成员)
+- [3. CVA6简介](#3-CVA6简介)
+- [4. 代码分析](#4-代码分析)
+  - [4.1 核心](#41-核心)
+    - [4.1.1 前端](#411-前端)
+    - [4.1.2 ID](#412-ID)
+    - [4.1.3 发行](#413-发行)
+    - [4.1.4 执行](#414-执行)  
+    - [4.1.5 提交](#415-提交)
+    - [4.1.6 缓存子系统](#416-缓存子系统)
+  - [4.2 软件](#42-软件)
+    - [4.2.1 应用](#421-应用)
 
-## 3. Introduction to CVA6
-CVA6 is a high-performance processor design that supports out-of-order and in-order execution. It is capable of handling advanced features such as branch prediction, instruction reordering, exception handling, and virtual memory support.
+## 1. 项目概览
+
+- 2023-2024年法国第四届RISC-V学生竞赛
+- 在RISC-V处理器上加速AI应用
+- 队名：Dragon core
+
+## 2. 团队成员
+
+- 刘竞泽  
+- 张亚磊 
+- 孙永欣  
+
+## 3. CVA6简介
+
+CVA6是一个高性能处理器设计，支持乱序和顺序执行。它能够处理如分支预测、指令重排、异常处理和虚拟内存支持等高级特性。
+
 ![RISC-V流水线](images/image1.png "流水线")
 
-## 4. Code Analysis
+## 4. 代码分析
 
-### 4.1 core
-The code implementation and functionalities of the folder 'core' are described in detail.
+### 4.1 核心
 
-#### 4.1.1 frontend 
+详细描述了'core'文件夹的代码实现和功能。
+
+#### 4.1.1 前端frontend 
+
 ![RISC-V流水线](images/image2.jpeg "流水线")
-- instr_realign.sv：Adjusts the instruction stream to ensure that instructions are aligned properly for decoding.  
 
-The frontend folder is related to the Front End and Instruction Decode (ID) stages.
-- bht.sv: BHT (Branch History Table) predicts the direction of branch instructions to enhance instruction flow.
-- ras.sv:The RAS (Return Address Stack) is a data structure used in processor design for storing and restoring return addresses of function calls.
-- btb.sv: BTB (Branch Target Buffer) caches the destination of recently executed branch instructions to speed up branch instruction execution.
-- instr_scan.sv: Responsible for scanning, identifying, and handling instructions entering the decode phase.
-- instr_queue.sv: Instruction Queue stores instructions waiting to be processed.Buffers instructions before they are issued to ensure a steady flow to the execution units.
-- fronted.sv: Defines the module interface and instances of some internal submodules.
+    前端文件夹与前端和指令解码(ID)阶段有关。
 
-#### 4.1.2 ID
-- compressed_decoder.sv:Decodes compressed instructions into their full-sized counterparts if the processor supports compressed instruction sets.
-- decoder.sv:Translates binary instruction codes into a set of control signals for the execution units.
-- controller.sv:
-- id_stage.sv：Represents the decode stage where instructions are interpreted and prepared for execution.
+- `bht.sv`: 分支历史表(BHT)，预测分支指令的方向，以增强指令流。
+- `ras.sv`: 返回地址栈(RAS)，处理器设计中用于存储和恢复函数调用的返回地址的数据结构。
+- `btb.sv`: 分支目标缓冲区(BTB)，缓存最近执行的分支指令的目的地，以加速分支指令的执行。
+- `instr_scan.sv`: 负责扫描、识别和处理进入解码阶段的指令。
+- `instr_queue.sv`: 指令队列，存储等待处理的指令。在发行到执行单元之前缓存指令，以确保执行单元的稳定输入。
+- `fronted.sv`: 定义模块接口和一些内部子模块的实例。
 
-#### 4.1.3 Issue
-- issue_read_operands.sv：The "Issue Read" stage dispatches ready instructions with their operands to the execution units.
-- scoreboard.sv:Tracks the status of instruction dependencies to ensure that instructions are issued only when their operands are ready.
-- issue_stage.sv：The stage where instructions are issued to the execution units if all operands are ready.
+#### 4.1.2 指令解码(ID)
+- `compressed_decoder.sv`：如果处理器支持压缩指令集，将压缩指令解码成其完整尺寸的对应指令。
+- `decoder.sv`：将二进制指令代码翻译成一组控制信号，供执行单元使用。
+- `controller.sv`：
+- `id_stage.sv`：代表指令解码阶段，此时指令被解释并准备执行。
 
-#### 4.1.4 Excute
-- alu.sv:ALU (Arithmetic Logic Unit) performs arithmetic and logical operations.
-- csr_buffer.sv:Temporarily holds the results of CSR operations before they are written back to the registers.
-- fpu_wrap.sv:FPU (Floating Point Unit) performs floating-point operations.
-- mult.sv:Performs multiplication and division operations.
-- multiplier.sv:Performs multiplication and division operations.
-- branch_unit.sv:Determines the outcome of branch instructions and detects mispredictions.
-- ex_stage.sv:
-- load_unit.sv:
-- store_unit.sv:
-- load_store_unit.sv:
-- amo_buffer.sv:atomic memory operations.
-- cvxif_fu.sv:
+#### 4.1.3 发行(Issue)
+- `issue_read_operands.sv`："发行读取"阶段，将准备好的指令及其操作数分发给执行单元。
+- `scoreboard.sv`：追踪指令依赖的状态，确保只有在操作数准备好时才发出指令。
+- `issue_stage.sv`：如果所有操作数都准备好，指令在此阶段被发给执行单元。
 
-#### 4.1.5 Commdit
-- commit_stage.sv：
-- csr_regfile.sv:
-- csr_buffer.sv:
+#### 4.1.4 执行(Execute)
+- `alu.sv`：算术逻辑单元(ALU)，执行算术和逻辑操作。
+- `csr_buffer.sv`：在结果回写到寄存器前，临时保存CSR操作的结果。
+- `fpu_wrap.sv`：浮点单元(FPU)，执行浮点操作。
+- `mult.sv`：执行乘法和除法操作。
+- `multiplier.sv`：执行乘法和除法操作。
+- `branch_unit.sv`：确定分支指令的结果并检测误预测。
+- `ex_stage.sv`：
+- `load_unit.sv`：
+- `store_unit.sv`：
+- `load_store_unit.sv`：
+- `amo_buffer.sv`：原子内存操作。
+- `cvxif_fu.sv`：
 
-#### 4.1.6 cache_subsystem
+#### 4.1.5 提交(Commit)
+- `commit_stage.sv`：
+- `csr_regfile.sv`：
+- `csr_buffer.sv`：
+
+#### 4.1.6 缓存子系统
+
 ![RISC-V流水线](images/image3.jpeg "流水线")
 
-- The cache_subsystem part is the processor's cache subsystem, managing and providing fast data access to the CPU. It usually includes the Instruction Cache (I-Cache) and Data Cache (D-Cache) for caching instructions and data, respectively, reducing the number of times the processor accesses the main memory, thus improving efficiency.
-- wt_dcache_ctrl.sv: DS Controller controls the data cache logic, including cache coherence, read/write requests, etc.
-- wt_dcache_mem.sv: DS Mem represents the memory interface of the data cache, managing data exchanges between the data cache and main memory or other cache levels.
-- wt_dcache_missunit.sv: DS Miss Unit handles misses when the processor tries to read data from the data cache but does not find it, possibly requiring fetching data from the main memory or a lower cache level.
-- wt_dcache_wbuffer.sv: DS Buffer, a buffer used to optimize data write operations. Data may be written first into this buffer when it can't be written to the cache immediately.
-- wt_dcache.sv:
-- wt_dcache_subsystem.sv: Manages the logic of instruction and data cache and the adapter logic to the memory interface. With a parametric design, it can adapt to different configurations and memory system interfaces.
+- 缓存子系统部分是处理器的缓存子系统，管理并提供CPU的快速数据访问。它通常包括指令缓存(I-Cache)和数据缓存(D-Cache)，分别用于缓存指令和数据，减少处理器访问主内存的次数，从而提高效率。
+- `wt_dcache_ctrl.sv`：数据缓存控制器，控制数据缓存逻辑，包括缓存一致性、读/写请求等。
+- `wt_dcache_mem.sv`：数据缓存的内存接口，管理数据缓存和主内存或其他缓存层之间的数据交换。
+- `wt_dcache_missunit.sv`：数据缓存未命中单元，处理处理器尝试从数据缓存读取数据但未找到时的情况，可能需要从主内存或较低缓存层获取数据。
+- `wt_dcache_wbuffer.sv`：数据写入缓冲，用于优化数据写入操作。当数据不能立即写入缓存时，首先写入此缓冲。
+- `wt_dcache.sv`：
+- `wt_dcache_subsystem.sv`：管理指令和数据缓存逻辑及与内存接口的适配逻辑。通过参数化设计，它可以适应不同的配置和内存系统接口。
 
-### 4.2 sw
+### 4.2 软件
 
-#### 4.2.1 app
-- mnist：Information about neural networks.
+#### 4.2.1 应用
+
+- `mnist`：关于神经网络的信息。
+
