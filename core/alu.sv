@@ -288,7 +288,7 @@ module alu
             {{riscv::XLEN - $clog2(riscv::XLEN) {1'b0}}, lz_tz_count};
         CLZW, CTZW: result_o = (lz_tz_wempty) ? 32 : {{riscv::XLEN - 5{1'b0}}, lz_tz_wcount};
 
-        // Count population
+        // Count population 
         CPOP, CPOPW: result_o = {{(riscv::XLEN - ($clog2(riscv::XLEN) + 1)) {1'b0}}, cpop};
 
         // Sign and Zero Extend
