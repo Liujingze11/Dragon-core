@@ -14,6 +14,9 @@
     - [4.1.6 cache_subsystem](#416-cache_subsystem)
   - [4.2 sw](#42-sw)
     - [4.2.1 app](#421-app)
+- [5. Modify](#5-modify)
+  - [5.1 Strategy](#51-strategy)
+  - [5.2 Modifications](#52-modifications)
 
 ## 1. Project Overview
 - 4th national RISC-V student contest 2023-2024 in France
@@ -87,7 +90,21 @@ The frontend folder is related to the Front End and Instruction Decode (ID) stag
 - wt_dcache.sv:
 - wt_dcache_subsystem.sv: Manages the logic of instruction and data cache and the adapter logic to the memory interface. With a parametric design, it can adapt to different configurations and memory system interfaces.
 
+#### 4.1.7 include
+- riscv_pkg.sv：The `riscv_pkg.sv` file is crucial for RISC-V processor design and simulation, offering essential definitions and tools for the RISC-V ISA. It includes parameters for instruction set architecture, data types for system states, opcode definitions, control and status registers (CSRs), and utility functions for instruction encoding. This package simplifies processor development by providing standardized components, making it a key element in RISC-V projects.
+
 ### 4.2 sw
 
 #### 4.2.1 app
 - mnist：Information about neural networks.
+
+## 5. Modify
+
+### 5.1 Strategy
+![RISC-V流水线](images/image4.png "流水线")
+
+### 5.2 Modifications
+- cnn_alu.sv
+- risv_pkg.sv
+- ariane_pkg.sv
+- decoder.sv
