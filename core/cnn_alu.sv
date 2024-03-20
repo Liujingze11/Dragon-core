@@ -1,105 +1,93 @@
 module cnn_alu
     import ariane_pkg::*;
-  #(
+ #(
     parameter config_pkg::cva6_cfg_t CVA6Cfg = config_pkg::cva6_cfg_empty
-    parameter DATA_WIDTH = 8,  // 数据和卷积核的位宽
-    parameter KERNEL_SIZE = 3  // 卷积核大小，这里为3x3
-  )
-  (
-    input logic clk_i,            // 时钟信号
-    input logic rst_ni,             // 复位信号，低电平有效
-    //input wire enable,            // ALU使能信号
-    input logic [DATA_WIDTH*KERNEL_SIZE*KERNEL_SIZE-1:0] image_data,  // 图像数据输入
-    input logic [DATA_WIDTH*KERNEL_SIZE*KERNEL_SIZE-1:0] kernel_data, // 卷积核数据输入
-    input logic conv_start,        // 开始卷积指令
-    output reg [DATA_WIDTH+4:0] conv_result, // 卷积结果输出，位宽略大以避免溢出
-    output reg valid              // 输出结果有效标志
-  );
-
-  // 内部信号定义
-  reg [DATA_WIDTH-1:0] image_block [KERNEL_SIZE*KERNEL_SIZE-1:0];
-  reg [DATA_WIDTH-1:0] kernel [KERNEL_SIZE*KERNEL_SIZE-1:0];
-  integer i;
-
-  // 图像数据和卷积核数据加载
-  always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
-      valid <= 0;
-    end else if (enable && conv_start) begin
-      for (i = 0; i < KERNEL_SIZE*KERNEL_SIZE; i=i+1) begin
-        image_block[i] <= image_data[(i+1)*DATA_WIDTH-1 -: DATA_WIDTH];
-        kernel[i] <= kernel_data[(i+1)*DATA_WIDTH-1 -: DATA_WIDTH];
-      end
-      valid <= 1;  // 加载完成，准备计算
-    end else begin
-      valid <= 0;
-    end
-  end
-
-  // 卷积计算
-  always @(posedge clk) begin
-    if (valid) begin
-      conv_result = 0;
-      for (i = 0; i < KERNEL_SIZE*KERNEL_SIZE; i=i+1) begin
-        conv_result = conv_result + (image_block[i] * kernel[i]);
-      end
-      valid <= 0;  // 计算完成，清除有效标志
-    end
-  end
-
-endmodule
-
-// CNN卷积执行单元
-module cnn_conv_unit
-#(
-    parameter DATA_WIDTH = 8,  // 输入数据位宽
-    parameter WEIGHT_WIDTH = 8, // 权重数据位宽
-    parameter ADDR_WIDTH = 32,  // 地址位宽
-    parameter SIZE_WIDTH = 8,   // 卷积窗口大小位宽
-    parameter OUT_WIDTH = 16    // 输出数据位宽
+    parameter DATA_WIDTH = 32,
+    parameter ADDR_WIDTH = 32
 )
 (
-    input logic clk,  // 时钟信号
-    input logic rst_n, // 复位信号，低电平有效
-    // CONV指令输入
-    input logic [ADDR_WIDTH-1:0] src_addr1, // 源地址1，指向输入特征图
-    input logic [ADDR_WIDTH-1:0] src_addr2, // 源地址2，指向卷积核
-    input logic [ADDR_WIDTH-1:0] dest_addr, // 目标地址，存储卷积结果
-    input logic [SIZE_WIDTH-1:0] size,      // 卷积窗口大小
-    input logic conv_start,                  // CONV操作开始信号
-    output logic conv_done                   // CONV操作完成信号
+    input logic clk_i,
+    input logic rst_n,
+    // 控制信号
+    //input [3:0] opcode,  // 操作码：vload, vstore, conv, vadd
+    //input [ADDR_WIDTH-1:0] src_addr1, // 源地址1
+    //input [ADDR_WIDTH-1:0] src_addr2, // 源地址2（vadd和conv使用）
+    //input [ADDR_WIDTH-1:0] dest_addr, // 目标地址
+    input logic [31:0] operand_a,
+    input logic [31:0] operand_b,
+    input logic [3:0] control_signal, // 控制信号输入 从decoder
+    output logic [31:0] result
+    output logic ready, // 准备好接受下一个
+    
+    // 数据接口（与内存或寄存器文件连接）
+    input [DATA_WIDTH-1:0] mem_data_in,
+    output logic [DATA_WIDTH-1:0] mem_data_out,
+    output logic [ADDR_WIDTH-1:0] mem_addr, // 内存地址
+    output logic mem_read,  // 内存读请求
+    output logic mem_write  // 内存写请求
+    // 可能还需要更多控制和状态信号
 );
+//中间信号
+reg [31:0] partial_result;
+reg [3:0] state;
 
-// 假设存在一个内存接口，用于读写操作数和写入结果
-// 需要设计适合您的系统的内存接口
+//操作码编码
+parameter IDLE = 4'b0000;
+parameter CONV_MUL = 4'b0001;
+parameter VADD = 4'b0010;
 
-// 内部状态和逻辑
-logic [OUT_WIDTH-1:0] conv_result; // 存储临时卷积结果
-logic processing; // 指示当前是否正在执行卷积操作
+// 实现细节：根据opcode执行不同操作，如数据加载、存储、卷积计算等
 
-// 实现简化版本的卷积操作
-// 注意：这里省略了具体的卷积计算实现，需要根据您的需求设计
-always_ff @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
-        conv_done <= 0;
-        processing <= 0;
-        // 其他必要的初始化
-    end
-    else if (conv_start && !processing) begin
-        processing <= 1;
-        // 开始卷积计算
-        // 根据src_addr1, src_addr2, size读取数据，执行卷积，结果写入dest_addr
-        // 这里假设conv_result已经计算出来
-        // memory_write(dest_addr, conv_result); // 将结果写入目标地址，需要实现memory_write函数
-        conv_done <= 1;
-        processing <= 0;
-    end
-    else begin
-        conv_done <= 0;
+always_ff (posedge clk_i or posedge rst_n) begin
+    if (rst_n) begin
+        state <= IDLE;
+        ready <= 1'b1;
+    end else begin
+        case (state)
+            IDLE: begin
+                // 等待命令
+                if (ready) begin
+                    case (control_signal)
+                        CONV_MUL: begin
+                            // 执行卷积运算（乘法）
+                            partial_result <= operand_a * operand_b;
+                            state <= CONV_MUL;
+                        end
+                        VADD: begin
+                            // 执行向量加法
+                            partial_result <= partial_result + operand_a;
+                            state <= VADD;
+                        end
+                        // 添加其他控制信号...
+                        default: begin
+                            // 如果是未知控制信号，保持空闲状态
+                            state <= IDLE;
+                        end
+                    endcase
+                    // 将结果发送给下一个阶段
+                    result <= partial_result;
+                end
+            end
+            CONV_MUL: begin
+                // 等待乘法完成
+                if (ready) begin
+                    state <= IDLE;
+                end
+            end
+            VADD: begin
+                // 等待加法完成
+                if (ready) begin
+                    state <= IDLE;
+                end
+            end
+            // 其他状态...
+        endcase
     end
 end
 
-// TODO: 实现具体的卷积计算逻辑，包括读取输入数据、执行卷积操作、将结果写回内存
+// 总线读写控制逻辑
+assign mem_read = (state == CONV_MUL); // 当执行卷积运算时，发起内存读请求
+assign mem_write = (state == VADD); // 当执行向量加法时，发起内存写请求
+assign mem_data_out = partial_result; // 写回部分结果到内存
 
 endmodule
-
