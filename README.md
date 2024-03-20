@@ -17,6 +17,7 @@
 - [5. Modify](#5-modify)
   - [5.1 Strategy](#51-strategy)
   - [5.2 Modifications](#52-modifications)
+- [6. Resource](#5-modify)
 
 ## 1. Project Overview
 - 4th national RISC-V student contest 2023-2024 in France
@@ -108,3 +109,6 @@ The frontend folder is related to the Front End and Instruction Decode (ID) stag
 - risv_pkg.sv
 - ariane_pkg.sv
 - decoder.sv
+
+## 6. Resource
+- https://pcotret.gitlab.io/riscv-custom/sw_toolchain.html
