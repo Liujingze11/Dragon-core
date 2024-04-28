@@ -207,6 +207,15 @@ package riscv;
     logic [6:0]   opcode;
   } atype_t;
 
+  // Dragon Core : VALU Instructions Type
+  typedef struct packed {
+    logic [31:22] blank;
+    logic [21:17] vrs2; //Vector Register Source of operand 1
+    logic [16:12] vrs1; //Vector Register Source of operand 2
+    logic [11:7]  vrd; //Vector Register Destination
+    logic [6:0]   opcode;
+  } valutype_t;
+
   typedef union packed {
     logic [31:0] instr;
     rtype_t      rtype;
@@ -217,6 +226,7 @@ package riscv;
     stype_t      stype;
     utype_t      utype;
     atype_t      atype;
+    valutype_t   valutype;
   } instruction_t;
 
   // --------------------

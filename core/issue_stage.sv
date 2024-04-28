@@ -92,8 +92,13 @@ module issue_stage
     input [              riscv::VLEN-1:0] lsu_addr_i,
     input [          (riscv::XLEN/8)-1:0] lsu_rmask_i,
     input [          (riscv::XLEN/8)-1:0] lsu_wmask_i,
-    input [ariane_pkg::TRANS_ID_BITS-1:0] lsu_addr_trans_id_i
+    input [ariane_pkg::TRANS_ID_BITS-1:0] lsu_addr_trans_id_i,
+
+    //Dragon Core : VALU
+    input  logic               valu_ready_i,
+    output logic               valu_valid_o
 );
+
   // ---------------------------------------------------
   // Scoreboard (SB) <-> Issue and Read Operands (IRO)
   // ---------------------------------------------------
@@ -205,6 +210,8 @@ module issue_stage
       .rs1_forwarding_o   (rs1_forwarding_xlen),
       .rs2_forwarding_o   (rs2_forwarding_xlen),
       .stall_issue_o      (stall_issue_o),
+      .valu_ready_i       (valu_ready_i),
+      .valu_valid_o       (valu_valid_o),
       .*
   );
 

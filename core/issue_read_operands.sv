@@ -77,11 +77,15 @@ module issue_read_operands
     input logic [CVA6Cfg.NrCommitPorts-1:0] we_gpr_i,
     input logic [CVA6Cfg.NrCommitPorts-1:0] we_fpr_i,
 
-    output logic stall_issue_o  // stall signal, we do not want to fetch any more entries
+    output logic stall_issue_o,  // stall signal, we do not want to fetch any more entries
     // committing instruction instruction
     // from scoreboard
     // input  scoreboard_entry     commit_instr_i,
     // output logic                commit_ack_o
+
+    // Dragon Core : VALU ready/valid
+    input logic valu_ready_i,
+    output logic valu_valid_o
 );
   logic stall;
   logic fu_busy;  // functional unit is busy
@@ -100,6 +104,7 @@ module issue_read_operands
   logic        branch_valid_q;
   logic        cvxif_valid_q;
   logic [31:0] cvxif_off_instr_q;
+  logic        valu_valid_q; // Dragon Core : VALU valid signal
 
   logic [TRANS_ID_BITS-1:0] trans_id_n, trans_id_q;
   fu_op operator_n, operator_q;  // operation to perform
@@ -134,6 +139,8 @@ module issue_read_operands
   assign cvxif_valid_o       = CVA6Cfg.CvxifEn ? cvxif_valid_q : '0;
   assign cvxif_off_instr_o   = CVA6Cfg.CvxifEn ? cvxif_off_instr_q : '0;
   assign stall_issue_o       = stall;
+  assign valu_valid_o        = valu_valid_q; //Dragon Core : enable control for the vector alu unit
+
   // ---------------
   // Issue Stage
   // ---------------
@@ -150,6 +157,7 @@ module issue_read_operands
       end else fu_busy = 1'b0;
       LOAD, STORE: fu_busy = ~lsu_ready_i;
       CVXIF: fu_busy = ~cvxif_ready_i;
+      VALU: fu_busy = ~valu_ready_i; // Dragon Core : fu_busy active on low level of ready signals
       default: fu_busy = 1'b0;
     endcase
   end
@@ -375,6 +383,21 @@ module issue_read_operands
       end
     end
   end
+
+  //Dragon Core
+  always_ff @(posedge clk_i or negedge rst_ni) begin
+      if (!rst_ni) begin
+        valu_valid_q <= 1'b0;
+      end else begin
+        valu_valid_q <= 1'b0;
+        if (!issue_instr_i.ex.valid && issue_instr_valid_i && issue_ack_o) begin
+            valu_valid_q <= 1'b1;
+        end
+        if (flush_i) begin         
+          valu_valid_q <= 1'b0;
+        end
+      end
+    end
 
   // We can issue an instruction if we do not detect that any other instruction is writing the same
   // destination register.

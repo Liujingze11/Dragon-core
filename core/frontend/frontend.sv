@@ -298,12 +298,12 @@ module frontend
   // Next PC
   // -------------------
   // next PC (NPC) can come from (in order of precedence):
-  // 0. Default assignment/replay instruction
-  // 1. Branch Predict taken
-  // 2. Control flow change request (misprediction)
-  // 3. Return from environment call
-  // 4. Exception/Interrupt
-  // 5. Pipeline Flush because of CSR side effects
+  // 0. Default assignment/replay instruction 默认分配/重播指令
+  // 1. Branch Predict taken  分支预测（预测被采纳）
+  // 2. Control flow change request (misprediction) 控制流改变请求（错误预测）
+  // 3. Return from environment call  从环境调用返回
+  // 4. Exception/Interrupt 异常/中断
+  // 5. Pipeline Flush because of CSR side effects   由于CSR副作用而进行的流水线清除错误预测处理略有不同选择PC即PC生成
   // Mis-predict handling is a little bit different
   // select PC a.k.a PC Gen
   always_comb begin : npc_select
@@ -324,12 +324,12 @@ module frontend
     end
     // 0. Branch Prediction
     if (bp_valid) begin
-      fetch_address = predict_address;
+      fetch_address = predict_address;  //预测分支地址
       npc_d = predict_address;
     end
     // 1. Default assignment
     if (if_ready) begin
-      npc_d = {fetch_address[riscv::VLEN-1:2], 2'b0} + 'h4;
+      npc_d = {fetch_address[riscv::VLEN-1:2], 2'b0} + 'h4; //默认下一个程序计数器取目前指令地址并加上十六进制值4来计算下一个PC
     end
     // 2. Replay instruction fetch
     if (replay) begin
@@ -428,7 +428,7 @@ module frontend
 
   if (CVA6Cfg.BTBEntries == 0) begin
     assign btb_prediction = '0;
-  end else begin : btb_gen
+  end else begin : btb_gen //分支目标缓冲器（Branch Target Buffer，BTB）当处理器执行分支指令时，BTB存储了预测的分支目标地址，以提前获取分支目标指令并加速执行。
     btb #(
         .CVA6Cfg   (CVA6Cfg),
         .NR_ENTRIES(CVA6Cfg.BTBEntries)
@@ -445,7 +445,7 @@ module frontend
 
   if (CVA6Cfg.BHTEntries == 0) begin
     assign bht_prediction = '0;
-  end else begin : bht_gen
+  end else begin : bht_gen //分支历史表（Branch History Table，BHT）。它记录了过去分支行为的历史，并根据这些历史信息来预测当前分支指令的行为，例如它是否会被采纳或被预测为不被采纳。
     bht #(
         .CVA6Cfg   (CVA6Cfg),
         .NR_ENTRIES(CVA6Cfg.BHTEntries)

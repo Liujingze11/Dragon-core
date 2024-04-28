@@ -260,7 +260,8 @@ package ariane_pkg;
     FPU,        // 7
     FPU_VEC,    // 8
     CVXIF,      // 9
-    ACCEL       // 10
+    ACCEL,      // 10
+    VALU        // 11 Dragon Core : Vector Arithmetic/Logic Functional Unit
   } fu_t;
 
   localparam EXC_OFF_RST = 8'h80;
@@ -563,7 +564,10 @@ package ariane_pkg;
     ACCEL_OP_STORE,
     // Zicond instruction
     CZERO_EQZ,
-    CZERO_NEZ
+    CZERO_NEZ,
+
+    // Dragon Core : Customized instruction operations
+    VCONV
   } fu_op;
 
   typedef struct packed {

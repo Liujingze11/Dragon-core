@@ -318,6 +318,11 @@ module cva6
   logic x_issue_valid_id_ex;
   logic x_issue_ready_ex_id;
   logic [31:0] x_off_instr_id_ex;
+
+  // VALU
+  logic valu_ready_ex_id;
+  logic valu_valid_id_ex;
+
   // --------------
   // EX <-> COMMIT
   // --------------
@@ -641,6 +646,10 @@ module cva6
       .lsu_rmask_i        (lsu_rmask),
       .lsu_wmask_i        (lsu_wmask),
       .lsu_addr_trans_id_i(lsu_addr_trans_id),
+
+      //Dragon Core : VALU
+      .valu_ready_i       (valu_ready_ex_id),
+      .valu_valid_o       (valu_valid_id_ex),
       .*
   );
 
@@ -753,7 +762,11 @@ module cva6
       .mem_paddr_o            (mem_paddr),
       .lsu_rmask_o            (lsu_rmask),
       .lsu_wmask_o            (lsu_wmask),
-      .lsu_addr_trans_id_o    (lsu_addr_trans_id)
+      .lsu_addr_trans_id_o    (lsu_addr_trans_id),
+
+      //Dragon Core : VALU
+      .valu_ready_o       (valu_ready_ex_id),
+      .valu_valid_i       (valu_valid_id_ex),
   );
 
   // ---------

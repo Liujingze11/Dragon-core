@@ -127,7 +127,11 @@ module ex_stage
     output [              riscv::PLEN-1:0] mem_paddr_o,
     output [          (riscv::XLEN/8)-1:0] lsu_rmask_o,
     output [          (riscv::XLEN/8)-1:0] lsu_wmask_o,
-    output [ariane_pkg::TRANS_ID_BITS-1:0] lsu_addr_trans_id_o
+    output [ariane_pkg::TRANS_ID_BITS-1:0] lsu_addr_trans_id_o,
+
+    // Dragon Core : VALU
+    output logic valu_ready_o,
+    input  logic valu_valid_i
 );
 
   // -------------------------
@@ -164,6 +168,24 @@ module ex_stage
   logic csr_ready, mult_ready;
   logic [TRANS_ID_BITS-1:0] mult_trans_id;
   logic mult_valid;
+
+
+  // Dragon Core : VALU
+  // data silence operation
+  logic [31:0] valu_operand_a;
+  logic [31:0] valu_operand_b;
+  logic [31:0] valu_result; 
+  assign valu_operand_a = valu_valid_i ? fu_data_i.operand_a : '0;
+  assign valu_operand_b = valu_valid_i ? fu_data_i.operand_b : '0;
+
+  valu valu_i (
+    .clk_i,
+    .rst_ni,
+    .operand_a_i (valu_operand_a),
+    .operand_b_i (valu_operand_b),
+    .result_o (valu_result)
+  );
+
 
   // 1. ALU (combinatorial)
   // data silence operation
