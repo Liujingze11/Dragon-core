@@ -13,6 +13,7 @@ module valu
     input  logic [31:0] operand_a_i,  // 32 bit operand_a
     input  logic [31:0] operand_b_i,  // 32 bit operand_b
     output logic [31:0] result_o,   // 32 bit output
+    output logic        valu_ready_o, // Ready signal
 );
 
 logic signed [7:0]  operand_a_8bits [3:0] 
@@ -39,5 +40,6 @@ always_comb begin
 end
 
 assign result_o = (mult_result[0] + mult_result[1]) + (mult_result[2] + mult_result[3]);
+assign valu_ready_o = 1'b1;
 
 endmodule

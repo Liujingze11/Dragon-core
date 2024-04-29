@@ -183,7 +183,8 @@ module ex_stage
     .rst_ni,
     .operand_a_i (valu_operand_a),
     .operand_b_i (valu_operand_b),
-    .result_o (valu_result)
+    .result_o (valu_result),
+    .valu_ready_o (valu_ready_o)
   );
 
 
@@ -240,7 +241,7 @@ module ex_stage
       .csr_addr_o
   );
 
-  assign flu_valid_o = alu_valid_i | branch_valid_i | csr_valid_i | mult_valid;
+  assign flu_valid_o = alu_valid_i | branch_valid_i | csr_valid_i | mult_valid | valu_valid_i; // Dragon Core
 
   // result MUX
   always_comb begin
