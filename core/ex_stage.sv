@@ -256,6 +256,8 @@ module ex_stage
     end else if (mult_valid) begin
       flu_result_o   = mult_result;
       flu_trans_id_o = mult_trans_id;
+    end else if (valu_valid) begin  // Dragon Core : Output result
+      flu_result_o = valu_result;
     end
   end
 
