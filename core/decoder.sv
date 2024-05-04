@@ -131,9 +131,9 @@ module decoder
         riscv::OpcodeCustom0: begin
           instruction_o.fu = VALU;
           instruction_o.op = VCONV;
-          instruction_o.rs2[4:0] = instr.valutype.vrs2; 
-          instruction_o.rs1[4:0] = instr.valutype.vrs1;
-          instruction_o.rd[4:0] = instr.valutype.vrd;
+          instruction_o.rs2[4:0] = instr.rtype.rs2; 
+          instruction_o.rs1[4:0] = instr.rtype.rs1;
+          instruction_o.rd[4:0] = instr.rtype.rd;
         end
 
         riscv::OpcodeSystem: begin
