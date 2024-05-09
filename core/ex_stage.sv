@@ -178,13 +178,15 @@ module ex_stage
   assign valu_operand_a = valu_valid_i ? fu_data_i.operand_a : '0;
   assign valu_operand_b = valu_valid_i ? fu_data_i.operand_b : '0;
 
-  valu valu_i (
-    .clk_i,
-    .rst_ni,
-    .operand_a_i (valu_operand_a),
-    .operand_b_i (valu_operand_b),
-    .result_o (valu_result),
-    .valu_ready_o (valu_ready_o)
+  valu #(
+      .CVA6Cfg(CVA6Cfg)
+  ) valu_i (
+      .clk_i,
+      .rst_ni,
+      .operand_a_i (valu_operand_a),
+      .operand_b_i (valu_operand_b),
+      .result_o (valu_result),
+      .valu_ready_o (valu_ready_o)
   );
 
 
@@ -257,7 +259,7 @@ module ex_stage
     end else if (mult_valid) begin
       flu_result_o   = mult_result;
       flu_trans_id_o = mult_trans_id;
-    end else if (valu_valid) begin  // Dragon Core : Output result
+    end else if (valu_valid_i) begin  // Dragon Core : Output result
       flu_result_o = valu_result;
     end
   end

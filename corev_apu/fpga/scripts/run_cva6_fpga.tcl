@@ -34,7 +34,7 @@ set_property board_part $::env(XILINX_BOARD) [current_project]
 
 
 
-# set number of threads to 8 (maximum, unfortunately)
+# set number of threads to 8 (maximum, unfortunatelyERROR: [Synth 8-439] module 'valu' not found [/home/imtuser/Documents/Dragon-core/core/ex_stage.sv:181]
 set_param general.maxThreads 8
 
 set_msg_config -id {[Synth 8-5858]} -new_severity "info"

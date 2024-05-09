@@ -767,6 +767,7 @@ module cva6
       //Dragon Core : VALU
       .valu_ready_o       (valu_ready_ex_id),
       .valu_valid_i       (valu_valid_id_ex),
+      .*
   );
 
   // ---------
