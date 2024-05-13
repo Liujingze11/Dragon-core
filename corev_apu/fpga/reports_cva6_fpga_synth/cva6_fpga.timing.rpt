@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.1 (lin64) Build 2902540 Wed May 27 19:54:35 MDT 2020
-| Date         : Thu May  9 18:22:26 2024
+| Date         : Mon May 13 21:53:48 2024
 | Host         : EQI07359 running 64-bit Ubuntu 22.04.1 LTS
 | Command      : report_timing -nworst 1 -delay_type max -sort_by group -file reports_cva6_fpga_synth/cva6_fpga.timing.rpt
 | Design       : cva6_zybo_z7_20
@@ -20,7 +20,7 @@ Slack (MET) :             0.358ns  (required time - arrival time)
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            20.000ns  (clk_out1_xlnx_clk_gen rise@20.000ns - clk_out1_xlnx_clk_gen rise@0.000ns)
   Data Path Delay:        19.216ns  (logic 3.617ns (18.823%)  route 15.599ns (81.177%))
-  Logic Levels:           24  (LUT2=2 LUT4=3 LUT5=3 LUT6=16)
+  Logic Levels:           24  (LUT2=2 LUT4=4 LUT5=2 LUT6=16)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
     Destination Clock Delay (DCD):    -2.245ns = ( 17.755 - 20.000 ) 
     Source Clock Delay      (SCD):    -1.569ns
@@ -48,53 +48,53 @@ Slack (MET) :             0.358ns  (required time - arrival time)
                          FDCE (Prop_fdce_C_Q)         0.478    -1.091 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/commit_pointer_q_reg[0][1]/Q
                          net (fo=10, unplaced)        0.513    -0.578    i_ariane/i_cva6/issue_stage_i/i_scoreboard/commit_pointer_q_reg[0][1]_0[1]
                          LUT2 (Prop_lut2_I0_O)        0.295    -0.283 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[1][issued]_i_2/O
-                         net (fo=163, unplaced)       0.561     0.278    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[1][issued]_i_2_n_13826
+                         net (fo=163, unplaced)       0.561     0.278    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[1][issued]_i_2_n_13839
                          LUT4 (Prop_lut4_I2_O)        0.124     0.402 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/speculative_read_pointer_q[1]_i_13/O
-                         net (fo=1, unplaced)         0.449     0.851    i_ariane/i_cva6/issue_stage_i/i_scoreboard/speculative_read_pointer_q[1]_i_13_n_13826
+                         net (fo=1, unplaced)         0.449     0.851    i_ariane/i_cva6/issue_stage_i/i_scoreboard/speculative_read_pointer_q[1]_i_13_n_13839
                          LUT5 (Prop_lut5_I4_O)        0.124     0.975 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/speculative_read_pointer_q[1]_i_8/O
                          net (fo=10, unplaced)        0.945     1.920    i_ariane/i_cva6/issue_stage_i/i_scoreboard/commit_instr_id_commit[0][fu][3]
                          LUT4 (Prop_lut4_I1_O)        0.124     2.044 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mstatus_q[mie]_i_13/O
-                         net (fo=3, unplaced)         0.467     2.511    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mstatus_q[mie]_i_13_n_13826
+                         net (fo=3, unplaced)         0.467     2.511    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mstatus_q[mie]_i_13_n_13839
                          LUT6 (Prop_lut6_I1_O)        0.124     2.635 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mstatus_q[mie]_i_7/O
-                         net (fo=2, unplaced)         1.122     3.757    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mstatus_q[mie]_i_7_n_13826
+                         net (fo=2, unplaced)         1.122     3.757    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mstatus_q[mie]_i_7_n_13839
                          LUT6 (Prop_lut6_I1_O)        0.124     3.881 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/dcsr_q[stepie]_i_6/O
                          net (fo=2, unplaced)         0.460     4.341    i_ariane/i_cva6/ex_stage_i/csr_buffer_i/mtval_q_reg[31]
                          LUT6 (Prop_lut6_I2_O)        0.124     4.465 r  i_ariane/i_cva6/ex_stage_i/csr_buffer_i/stval_q[31]_i_4/O
                          net (fo=74, unplaced)        0.541     5.006    i_ariane/i_cva6/issue_stage_i/i_scoreboard/csr_exception_csr_commit[valid]
                          LUT4 (Prop_lut4_I2_O)        0.124     5.130 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/FSM_sequential_state_q[3]_i_5/O
-                         net (fo=106, unplaced)       0.550     5.680    i_ariane/i_cva6/issue_stage_i/i_scoreboard/wfi_q_reg
+                         net (fo=105, unplaced)       0.550     5.680    i_ariane/i_cva6/issue_stage_i/i_scoreboard/wfi_q_reg
                          LUT6 (Prop_lut6_I0_O)        0.124     5.804 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/FSM_sequential_state_q[3]_i_6/O
-                         net (fo=2, unplaced)         0.913     6.717    i_ariane/i_cva6/issue_stage_i/i_scoreboard/FSM_sequential_state_q[3]_i_6_n_13826
+                         net (fo=2, unplaced)         0.913     6.717    i_ariane/i_cva6/issue_stage_i/i_scoreboard/FSM_sequential_state_q[3]_i_6_n_13839
                          LUT6 (Prop_lut6_I1_O)        0.124     6.841 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/FSM_sequential_state_q[3]_i_2/O
                          net (fo=147, unplaced)       0.558     7.399    i_ariane/i_cva6/ex_stage_i/i_mult/i_div/flush_ctrl_id
                          LUT5 (Prop_lut5_I4_O)        0.116     7.515 f  i_ariane/i_cva6/ex_stage_i/i_mult/i_div/mem_q[0][sbe][result][31]_i_13/O
                          net (fo=34, unplaced)        0.522     8.037    i_ariane/i_cva6/issue_stage_i/i_issue_read_operands/mult_valid_1
                          LUT2 (Prop_lut2_I1_O)        0.124     8.161 r  i_ariane/i_cva6/issue_stage_i/i_issue_read_operands/mem_q[0][sbe][result][31]_i_14/O
-                         net (fo=2, unplaced)         0.460     8.621    i_ariane/i_cva6/issue_stage_i/i_issue_read_operands/mem_q[0][sbe][result][31]_i_14_n_13826
+                         net (fo=2, unplaced)         0.460     8.621    i_ariane/i_cva6/issue_stage_i/i_issue_read_operands/mem_q[0][sbe][result][31]_i_14_n_13839
                          LUT6 (Prop_lut6_I2_O)        0.124     8.745 r  i_ariane/i_cva6/issue_stage_i/i_issue_read_operands/mem_q[0][sbe][result][31]_i_10/O
                          net (fo=14, unplaced)        0.500     9.245    i_ariane/i_cva6/issue_stage_i/i_scoreboard/flu_trans_id_ex_id[1]
-                         LUT6 (Prop_lut6_I4_O)        0.124     9.369 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_199/O
-                         net (fo=2, unplaced)         0.913    10.282    i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_199_n_13826
-                         LUT6 (Prop_lut6_I0_O)        0.124    10.406 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_86/O
-                         net (fo=1, unplaced)         0.419    10.825    i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_86_n_13826
-                         LUT6 (Prop_lut6_I2_O)        0.124    10.949 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_42/O
-                         net (fo=5, unplaced)         0.477    11.426    i_ariane/i_cva6/issue_stage_i/i_scoreboard/rs2_fwd_req[3]
-                         LUT6 (Prop_lut6_I1_O)        0.124    11.550 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_19/O
-                         net (fo=33, unplaced)        0.521    12.071    i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_19_n_13826
-                         LUT5 (Prop_lut5_I3_O)        0.124    12.195 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_10/O
-                         net (fo=2, unplaced)         0.460    12.655    i_ariane/i_cva6/issue_stage_i/i_scoreboard/rs2_valid_iro_sb
-                         LUT6 (Prop_lut6_I0_O)        0.124    12.779 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][fu][2]_i_8/O
-                         net (fo=1, unplaced)         0.449    13.228    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][fu][2]_i_8_n_13826
+                         LUT6 (Prop_lut6_I4_O)        0.124     9.369 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_224/O
+                         net (fo=2, unplaced)         0.913    10.282    i_ariane/i_cva6/issue_stage_i/i_scoreboard/asid_to_be_flushed[0]_i_224_n_13839
+                         LUT6 (Prop_lut6_I0_O)        0.124    10.406 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/vaddr_to_be_flushed[31]_i_66/O
+                         net (fo=1, unplaced)         0.419    10.825    i_ariane/i_cva6/issue_stage_i/i_scoreboard/vaddr_to_be_flushed[31]_i_66_n_13839
+                         LUT6 (Prop_lut6_I2_O)        0.124    10.949 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/vaddr_to_be_flushed[31]_i_34/O
+                         net (fo=5, unplaced)         0.477    11.426    i_ariane/i_cva6/id_stage_i/vaddr_to_be_flushed[0]_i_4[1]
+                         LUT6 (Prop_lut6_I1_O)        0.124    11.550 r  i_ariane/i_cva6/id_stage_i/vaddr_to_be_flushed[31]_i_16/O
+                         net (fo=33, unplaced)        0.521    12.071    i_ariane/i_cva6/issue_stage_i/i_scoreboard/vaddr_to_be_flushed[0]_i_3_2
+                         LUT4 (Prop_lut4_I2_O)        0.124    12.195 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/vaddr_to_be_flushed[31]_i_9/O
+                         net (fo=2, unplaced)         0.460    12.655    i_ariane/i_cva6/issue_stage_i/i_scoreboard/rs1_valid_sb_iro
+                         LUT6 (Prop_lut6_I0_O)        0.124    12.779 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][fu][2]_i_8/O
+                         net (fo=1, unplaced)         0.449    13.228    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][fu][2]_i_8_n_13839
                          LUT6 (Prop_lut6_I3_O)        0.124    13.352 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][fu][2]_i_2/O
-                         net (fo=21, unplaced)        0.510    13.862    i_ariane/i_cva6/issue_stage_i/i_scoreboard/issue_q_reg[sbe][valid]
+                         net (fo=21, unplaced)        0.510    13.862    i_ariane/i_cva6/issue_stage_i/i_scoreboard/issue_q_reg[sbe][use_zimm]
                          LUT6 (Prop_lut6_I0_O)        0.124    13.986 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_24/O
-                         net (fo=3, unplaced)         0.920    14.906    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_24_n_13826
+                         net (fo=3, unplaced)         0.920    14.906    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_24_n_13839
                          LUT6 (Prop_lut6_I3_O)        0.124    15.030 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_9/O
-                         net (fo=1, unplaced)         0.902    15.932    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_9_n_13826
+                         net (fo=1, unplaced)         0.902    15.932    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_9_n_13839
                          LUT6 (Prop_lut6_I3_O)        0.124    16.056 f  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_3/O
-                         net (fo=24, unplaced)        0.966    17.022    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_3_n_13826
+                         net (fo=24, unplaced)        0.966    17.022    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_3_n_13839
                          LUT6 (Prop_lut6_I1_O)        0.124    17.146 r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_1/O
-                         net (fo=5, unplaced)         0.501    17.647    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_1_n_13826
+                         net (fo=5, unplaced)         0.501    17.647    i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q[0][sbe][rd][4]_i_1_n_13839
                          FDCE                                         r  i_ariane/i_cva6/issue_stage_i/i_scoreboard/mem_q_reg[0][sbe][rd][0]/CE
   -------------------------------------------------------------------    -------------------
 

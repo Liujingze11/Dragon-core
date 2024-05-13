@@ -3,7 +3,7 @@
 
 #ifndef N2D2_EXPORTCPP_MEM_INFO_H
 #define N2D2_EXPORTCPP_MEM_INFO_H
-//定义网络相关的参数
+
 #define MEMORY_SIZE 2160
 #define MEMORY_ALIGNMENT 1
 #define ENV_MEM_SIZE 1

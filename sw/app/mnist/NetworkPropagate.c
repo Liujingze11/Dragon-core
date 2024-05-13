@@ -1,23 +1,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "env.h"// 引入环境设置
-#include "mem_info.h"// 引入内存信息
+#include "env.h"
+#include "mem_info.h"
 
-#include "conv1.h"// 引入第一层卷积层的定义
-#include "conv2.h"// 引入第二层卷积层的定义
-#include "fc1.h"// 引入第一层全连接层的定义
-#include "fc2.h"// 引入第二层全连接层的定义
+#include "conv1.h"
+#include "conv2.h"
+#include "fc1.h"
+#include "fc2.h"
 
 
-static DATA_T mem[MEMORY_SIZE];// 定义一个静态内存数组
+static DATA_T mem[MEMORY_SIZE];
 
-// 辅助函数：求两个整数的最大值
 static int max(int lhs, int rhs) {
         return (lhs >= rhs)?lhs:rhs;
     }
 
-// 辅助函数：将整数限制在指定的范围内
 static int clamp(int v, int lo, int hi) {
     if(v < lo) {
         return lo;
@@ -30,7 +28,32 @@ static int clamp(int v, int lo, int hi) {
     }
 }
 
-// 辅助函数：在一定范围内执行乘加累积操作
+// Dragon Core : modify macsOnRange to use "conv" custom instruction
+static void macsOnRangeConv(const UDATA_T* __restrict inputs,
+                        const WDATA_T* __restrict weights,
+                        SUM_T* __restrict weightedSum,
+                        int nb_iterations)
+{   
+    //int main_part = nb_iterations - (nb_iterations % 4);
+    uint32_t packed_inputs;
+    uint32_t packed_weights;
+    uint32_t result;
+
+    for (int iter = 0; iter < nb_iterations; iter+=4) {
+        packed_inputs = 0;
+        packed_weights = 0;
+        packed_inputs = ((uint32_t)inputs[iter+3] << 24 | (uint32_t)inputs[iter+2] << 16 | (uint32_t)inputs[iter+1] << 8 | (uint32_t)inputs[iter+0]);
+        packed_weights = ((uint32_t)(uint8_t)weights[iter+3] << 24 | (uint32_t)(uint8_t)weights[iter+2] << 16 | (uint32_t)(uint8_t)weights[iter+1] << 8 | (uint32_t)(uint8_t)weights[iter+0]);
+
+        asm volatile (
+            "conv %[result], %[inputs], %[weights]\n\t"
+            : [result] "=r" (result)
+            : [inputs] "r" (packed_inputs), [weights] "r" (packed_weights)
+        );
+        *weightedSum += result;
+    }
+}
+
 static void macsOnRange(const UDATA_T* __restrict inputs,
                         const WDATA_T* __restrict weights,
                         SUM_T* __restrict weightedSum,
@@ -40,17 +63,17 @@ static void macsOnRange(const UDATA_T* __restrict inputs,
         *weightedSum += inputs[iter] * weights[iter];
     }
 }
-// 辅助函数：饱和函数，用于将数值限制在指定范围内
+
 static UDATA_T saturate(SUM_T value, uint32_t sat) {
     return clamp(value, (SUM_T)(0), ((SUM_T)(1) << sat) - 1);
 }
-// 辅助函数：根据激活函数和权重调整输出
+
 static UDATA_T sat(SUM_T weightedSum, int output,
                                            ActivationFunction_T func,
                                            /* const Rescaling_T& __restrict rescaling */
                                            int shift)
 {
-    switch(func) {// 根据激活函数调整输出值
+    switch(func) {
         case Linear:
         case Saturation: {
             break;
@@ -66,8 +89,8 @@ static UDATA_T sat(SUM_T weightedSum, int output,
 
     return saturate(weightedSum>>shift, NB_BITS);
 }
-// 卷积层的前向传播函数
-static void convcellPropagate1(// 函数参数，包括输入、输出、偏置、权重等
+
+static void convcellPropagate1(
     const UDATA_T* __restrict inputs,
     UDATA_T* __restrict outputs,
     const BDATA_T* __restrict biasses,
@@ -93,7 +116,7 @@ static void convcellPropagate1(// 函数参数，包括输入、输出、偏置�
     int OUTPUT_MEM_WRAP_OFFSET,
     int OUTPUT_MEM_WRAP_SIZE,
     int OUTPUT_MEM_STRIDE)
-{// 函数主体，包括卷积操作的实现
+{
     int OUTPUTS_HEIGHT_NOPAD
         = (CHANNELS_HEIGHT - KERNEL_HEIGHT + STRIDE_Y) / STRIDE_Y;
     int OUTPUTS_WIDTH_NOPAD
@@ -169,7 +192,7 @@ static void convcellPropagate1(// 函数参数，包括输入、输出、偏置�
                             && OUTPUTS_WIDTH == OUTPUTS_WIDTH_NOPAD)
                                 || sxMax - sxMin == KERNEL_WIDTH)))
                     {
-                        macsOnRange(
+                        macsOnRangeConv(
                             inputs + iOffset, 
                             weights + wOffset, 
                             &weightedSum,KERNEL_WIDTH * NB_CHANNELS);
@@ -209,8 +232,8 @@ static void convcellPropagate1(// 函数参数，包括输入、输出、偏置�
         }
     }
 }
-// 全连接层的前向传播函数
-static void fccellPropagateUDATA_T( // 函数参数，包括输入、输出、偏置、权重等
+
+static void fccellPropagateUDATA_T(
     const UDATA_T* __restrict inputs,
     UDATA_T* __restrict outputs,
     const BDATA_T* __restrict biasses,
@@ -237,9 +260,7 @@ static void fccellPropagateUDATA_T( // 函数参数，包括输入、输出、�
     // static_assert(OUTPUTS_HEIGHT == 1, "Outputs height should be 1");
     // static_assert(OUTPUTS_WIDTH == 1, "Outputs width should be 1");
     // static_assert(OUTPUT_MEM_WRAP_SIZE == 0, "Output wrapping not supported");
-    // 函数主体，包括全连接操作的实现
-    //！！！！！添加的函数
-    unsigned long startCycle = read_csr(mcycle);
+
     for (int och = 0; och < NB_OUTPUTS; och++) {
         SUM_T weightedSum = biasses[och];
 
@@ -267,7 +288,7 @@ static void fccellPropagateUDATA_T( // 函数参数，包括输入、输出、�
                                     * (iy + CHANNELS_HEIGHT * och);
 
             if (!wrapInRange && INPUT_MEM_STRIDE == NB_CHANNELS) {
-                macsOnRange(
+                macsOnRangeConv(
                     inputs + iOffset, 
                     weights + wOffset, 
                     &weightedSum, NB_CHANNELS * CHANNELS_WIDTH);
@@ -293,14 +314,9 @@ static void fccellPropagateUDATA_T( // 函数参数，包括输入、输出、�
         }
 
         outputs[och] = sat(weightedSum, och, ACTIVATION, rescaling);
-        //！！！！！！！！
-        unsigned long endCycle = read_csr(mcycle);
-        unsigned long layerCycles = endCycle - startCycle;
-        printf("conv1 layer cycles: %lu\n", layerCycles);
-
     }
 }
-// 类似上面的 fccellPropagateUDATA_T 函数，但数据类型不同，带符号
+
 static void fccellPropagateDATA_T(
     const UDATA_T* __restrict inputs,
     DATA_T* __restrict outputs,
@@ -384,7 +400,7 @@ static void fccellPropagateDATA_T(
         outputs[och] = sat(weightedSum, och, ACTIVATION, rescaling);
     }
 }
-// 最大值传播函数
+
 static void maxPropagate1(
     const DATA_T* __restrict inputs,
     int32_t* __restrict outputs,

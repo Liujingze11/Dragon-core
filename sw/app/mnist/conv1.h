@@ -6,34 +6,34 @@
 
 #include "typedefs.h"
 #include "utils.h"
-#define CONV1_NB_OUTPUTS 16 //输出16个特征图
-#define CONV1_NB_CHANNELS 1 //1个通道
-#define CONV1_OUTPUTS_WIDTH 11 //特征图宽度为11
-#define CONV1_OUTPUTS_HEIGHT 11//特征图宽度为11
-#define CONV1_OX_SIZE 11 
-#define CONV1_OY_SIZE 11 
-#define CONV1_CHANNELS_WIDTH 24  //通道的图像宽度
-#define CONV1_CHANNELS_HEIGHT 24 //通道的图像长度
-#define CONV1_KERNEL_WIDTH 4  //核宽
-#define CONV1_KERNEL_HEIGHT 4 //核高
-#define CONV1_SUB_SAMPLE_X 1 
-#define CONV1_SUB_SAMPLE_Y 1 
-#define CONV1_STRIDE_X 2 //步长
-#define CONV1_STRIDE_Y 2 //步长
-#define CONV1_PADDING_X 0 //没有填充
-#define CONV1_PADDING_Y 0 //没有填充
-#define CONV1_NO_BIAS 1 //没有偏置
+#define CONV1_NB_OUTPUTS 16
+#define CONV1_NB_CHANNELS 1
+#define CONV1_OUTPUTS_WIDTH 11
+#define CONV1_OUTPUTS_HEIGHT 11
+#define CONV1_OX_SIZE 11
+#define CONV1_OY_SIZE 11
+#define CONV1_CHANNELS_WIDTH 24
+#define CONV1_CHANNELS_HEIGHT 24
+#define CONV1_KERNEL_WIDTH 4
+#define CONV1_KERNEL_HEIGHT 4
+#define CONV1_SUB_SAMPLE_X 1
+#define CONV1_SUB_SAMPLE_Y 1
+#define CONV1_STRIDE_X 2
+#define CONV1_STRIDE_Y 2
+#define CONV1_PADDING_X 0
+#define CONV1_PADDING_Y 0
+#define CONV1_NO_BIAS 1
 
-#define CONV1_ACTIVATION Rectifier //使用修正线性单元（ReLU）作为激活函数
+#define CONV1_ACTIVATION Rectifier
 #define CONV1_SHIFT 8
-static const int32_t CONV1_SCALING_FACTOR_PER_OUTPUT[] = {0};//是每个输出的缩放因子，用于量化，这里设置为0
+static const int32_t CONV1_SCALING_FACTOR_PER_OUTPUT[] = {0};
 
-#define CONV1_OUTPUTS_SIZE (CONV1_NB_OUTPUTS*CONV1_OUTPUTS_WIDTH*CONV1_OUTPUTS_HEIGHT) //输出规模数据总大小
-#define CONV1_CHANNELS_SIZE (CONV1_NB_CHANNELS*CONV1_CHANNELS_WIDTH*CONV1_CHANNELS_HEIGHT) //输入规模数据总大小
+#define CONV1_OUTPUTS_SIZE (CONV1_NB_OUTPUTS*CONV1_OUTPUTS_WIDTH*CONV1_OUTPUTS_HEIGHT)
+#define CONV1_CHANNELS_SIZE (CONV1_NB_CHANNELS*CONV1_CHANNELS_WIDTH*CONV1_CHANNELS_HEIGHT)
 
-static const BDATA_T conv1_biases[CONV1_NB_OUTPUTS] = {0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, };//每个输出特征图的偏置值，这里都设置为128（中心值，因为没有偏置）
+static const BDATA_T conv1_biases[CONV1_NB_OUTPUTS] = {0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, 0 + 128, };
 
-#define CONV1_WEIGHTS_SIZE (CONV1_NB_OUTPUTS*CONV1_KERNEL_WIDTH*CONV1_KERNEL_HEIGHT*CONV1_NB_CHANNELS)//权重数组的大小 4*4*16=256
+#define CONV1_WEIGHTS_SIZE (CONV1_NB_OUTPUTS*CONV1_KERNEL_WIDTH*CONV1_KERNEL_HEIGHT*CONV1_NB_CHANNELS)
 
 // Flatten weights with the order [NB_OUTPUTS][KERNEL_HEIGHT][KERNEL_WIDTH][NB_CHANNELS]
 static const WDATA_T conv1_weights[CONV1_WEIGHTS_SIZE] = {13, 8, -6, -3, -10, -10, 1, 5, -4, 1, -5, 7, -2, -2, -6, -14, 6, -10, -7, -21, -32, -38, -40, -40, 

@@ -565,7 +565,7 @@ package ariane_pkg;
     // Zicond instruction
     CZERO_EQZ,
     CZERO_NEZ,
-
+    
     // Dragon Core : Customized instruction operations
     VCONV
   } fu_op;

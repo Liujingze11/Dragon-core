@@ -23,7 +23,7 @@
 
 #include "params.h"
 #include <stdint.h>
-// 定义激活函数的枚举类型
+
 typedef enum {
     Logistic,
     LogisticWithLoss,
@@ -31,35 +31,31 @@ typedef enum {
     Tanh,
     TanhLeCun,
     Saturation,
-    Rectifier,// 整流器（ReLU）
+    Rectifier,
     Linear,
     Softplus
 } ActivationFunction_T;
 
-// 定义池化类型的枚举
 typedef enum {
-    Max,// 最大池化
-    Average//// 平均池化
+    Max,
+    Average
 } Pooling_T;
 
-// 定义插值结构体
 typedef struct {
-    unsigned int lowIndex;// 低索引
-    unsigned int highIndex;// 高索引
-    float interpolation;// 插值
+    unsigned int lowIndex;
+    unsigned int highIndex;
+    float interpolation;
 } Interpolation;
 
-// 定义操作模式的枚举
 typedef enum {
-    Sum,// 求和
-    Mult // 乘法
+    Sum,
+    Mult
 } OpMode_T;
 
-// 定义系数模式的枚举
 typedef enum {
-    PerLayer,// 每层
-    PerInput,// 每输入
-    PerChannel// 每通道
+    PerLayer,
+    PerInput,
+    PerChannel
 } CoeffMode_T;
 
 #if defined(HAS_AP_CINT) && NB_BITS > 0 && NB_BITS != 8 && NB_BITS != 16 \
@@ -94,7 +90,7 @@ typedef INT(NB_BITS) DATA_T;
 typedef UINT(NB_BITS) UDATA_T;
 typedef INT(MULT(NB_BITS, 4)) SUM_T;
 typedef SUM_T BDATA_T;
-#else//根据NB_BITS的值来定义不同的数据类型
+#else
 #if NB_BITS == -64
 typedef double DATA_T;
 typedef double UDATA_T;
@@ -122,9 +118,9 @@ typedef int64_t SUM_T;
 typedef SUM_T BDATA_T;
 #endif
 #endif
-// 定义权重数据类型
+
 typedef DATA_T WDATA_T;
-// 定义数据类型的最大最小值
+
 #if NB_BITS < 0
 #define DATA_T_MAX 1.0
 #define DATA_T_MIN -1.0

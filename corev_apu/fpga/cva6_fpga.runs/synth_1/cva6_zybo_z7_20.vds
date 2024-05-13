@@ -2,8 +2,8 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Thu May  9 18:14:33 2024
-# Process ID: 20218
+# Start of session at: Mon May 13 21:45:54 2024
+# Process ID: 192490
 # Current directory: /home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1
 # Command line: vivado -log cva6_zybo_z7_20.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source cva6_zybo_z7_20.tcl
 # Log file: /home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/cva6_zybo_z7_20.vds
@@ -17,13 +17,13 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020
 INFO: [Device 21-403] Loading part xc7z020clg400-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 20223
-WARNING: [Synth 8-1921] elaboration system task error violates IEEE 1800 syntax [/home/imtuser/Documents/Dragon-core/core/cva6.sv:573]
+INFO: [Synth 8-7075] Helper process launched with PID 192495
+WARNING: [Synth 8-1921] elaboration system task error violates IEEE 1800 syntax [/home/imtuser/Documents/Dragon-core/core/cva6.sv:572]
 WARNING: [Synth 8-1921] elaboration system task error violates IEEE 1800 syntax [/home/imtuser/Documents/Dragon-core/core/cva6_accel_first_pass_decoder_stub.sv:29]
 WARNING: [Synth 8-2507] parameter declaration becomes local in miss_handler with formal parameter declaration list [/home/imtuser/Documents/Dragon-core/core/cache_subsystem/miss_handler.sv:70]
 WARNING: [Synth 8-2507] parameter declaration becomes local in rgmii_lfsr with formal parameter declaration list [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/src/ariane-ethernet/rgmii_lfsr.sv:364]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 2140.426 ; gain = 20.930 ; free physical = 718 ; free virtual = 37063
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2140.426 ; gain = 20.930 ; free physical = 714 ; free virtual = 33778
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'cva6_zybo_z7_20' [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/src/cva6_zybo_z7_20.sv:25]
 	Parameter IsRVFI bound to: 1'b0 
@@ -260,8 +260,8 @@ INFO: [Synth 8-6157] synthesizing module 'AXI_BUS' [/home/imtuser/Documents/Drag
 	Parameter AXI_USER_WIDTH bound to: 32 - type: integer 
 	Parameter AXI_STRB_WIDTH bound to: 8 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'AXI_BUS' (0#1) [/home/imtuser/Documents/Dragon-core/corev_apu/tb/axi_intf.sv:19]
-INFO: [Synth 8-6157] synthesizing module 'xlnx_axi_dwidth_converter_dm_slave' [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-20218-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_slave_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'xlnx_axi_dwidth_converter_dm_slave' (1#1) [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-20218-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_slave_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'xlnx_axi_dwidth_converter_dm_slave' [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-192490-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_slave_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'xlnx_axi_dwidth_converter_dm_slave' (1#1) [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-192490-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_slave_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'AXI_BUS' [/home/imtuser/Documents/Dragon-core/corev_apu/tb/axi_intf.sv:19]
 	Parameter AXI_ADDR_WIDTH bound to: 64 - type: integer 
 	Parameter AXI_DATA_WIDTH bound to: 64 - type: integer 
@@ -276,8 +276,8 @@ INFO: [Synth 8-6157] synthesizing module 'AXI_BUS' [/home/imtuser/Documents/Drag
 	Parameter AXI_USER_WIDTH bound to: 32 - type: integer 
 	Parameter AXI_STRB_WIDTH bound to: 8 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'AXI_BUS' (1#1) [/home/imtuser/Documents/Dragon-core/corev_apu/tb/axi_intf.sv:19]
-INFO: [Synth 8-6157] synthesizing module 'xlnx_axi_dwidth_converter_dm_master' [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-20218-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_master_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'xlnx_axi_dwidth_converter_dm_master' (2#1) [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-20218-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_master_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'xlnx_axi_dwidth_converter_dm_master' [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-192490-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_master_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'xlnx_axi_dwidth_converter_dm_master' (2#1) [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/.Xil/Vivado-192490-EQI07359/realtime/xlnx_axi_dwidth_converter_dm_master_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'bootrom_32' [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/src/bootrom/bootrom_32.sv:17]
 	Parameter RomSize bound to: 32'sb00000000000000000000001111001110 
 INFO: [Synth 8-6155] done synthesizing module 'bootrom_32' (3#1) [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/src/bootrom/bootrom_32.sv:17]
@@ -3993,14 +3993,15 @@ WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic 
 	Parameter CVA6Cfg[CachedRegionLength][1] bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
 	Parameter CVA6Cfg[CachedRegionLength][0] bound to: 64'b0000000000000000000000000000000001000000000000000000000000000000 
 	Parameter CVA6Cfg[MaxOutstandingStores] bound to: 7 - type: integer 
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:145]
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:543]
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:688]
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:800]
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:817]
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:1104]
-WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/decoder.sv:1246]
-WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/decoder.sv:1315]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:134]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:277]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:551]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:696]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:808]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:825]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/decoder.sv:1112]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/decoder.sv:1254]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/decoder.sv:1323]
 	Parameter CVA6Cfg[NrCommitPorts] bound to: 1 - type: integer 
 	Parameter CVA6Cfg[AxiAddrWidth] bound to: 64 - type: integer 
 	Parameter CVA6Cfg[AxiDataWidth] bound to: 64 - type: integer 
@@ -4606,8 +4607,8 @@ WARNING: [Synth 8-639] system function call 'random' not supported [/home/imtuse
 WARNING: [Synth 8-639] system function call 'random' not supported [/home/imtuser/Documents/Dragon-core/core/ariane_regfile_fpga.sv:120]
 WARNING: [Synth 8-639] system function call 'random' not supported [/home/imtuser/Documents/Dragon-core/core/ariane_regfile_fpga.sv:120]
 WARNING: [Synth 8-639] system function call 'random' not supported [/home/imtuser/Documents/Dragon-core/core/ariane_regfile_fpga.sv:120]
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/issue_read_operands.sv:151]
-WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/issue_read_operands.sv:273]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/issue_read_operands.sv:150]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/issue_read_operands.sv:272]
 	Parameter CVA6Cfg[NrCommitPorts] bound to: 1 - type: integer 
 	Parameter CVA6Cfg[AxiAddrWidth] bound to: 64 - type: integer 
 	Parameter CVA6Cfg[AxiDataWidth] bound to: 64 - type: integer 
@@ -5020,10 +5021,10 @@ WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtus
 	Parameter CVA6Cfg[CachedRegionLength][1] bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
 	Parameter CVA6Cfg[CachedRegionLength][0] bound to: 64'b0000000000000000000000000000000001000000000000000000000000000000 
 	Parameter CVA6Cfg[MaxOutstandingStores] bound to: 7 - type: integer 
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/alu.sv:69]
-INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/alu.sv:241]
-WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/alu.sv:251]
-WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/alu.sv:255]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/alu.sv:68]
+INFO: [Synth 8-294] found qualifier unique on case statement: implementing as parallel_case [/home/imtuser/Documents/Dragon-core/core/alu.sv:240]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/alu.sv:250]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/alu.sv:254]
 	Parameter CVA6Cfg[NrCommitPorts] bound to: 1 - type: integer 
 	Parameter CVA6Cfg[AxiAddrWidth] bound to: 64 - type: integer 
 	Parameter CVA6Cfg[AxiDataWidth] bound to: 64 - type: integer 
@@ -5300,7 +5301,7 @@ WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtus
 	Parameter CVA6Cfg[CachedRegionLength][1] bound to: 64'b0000000000000000000000000000000000000000000000000000000000000000 
 	Parameter CVA6Cfg[CachedRegionLength][0] bound to: 64'b0000000000000000000000000000000001000000000000000000000000000000 
 	Parameter CVA6Cfg[MaxOutstandingStores] bound to: 7 - type: integer 
-WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/ex_stage.sv:251]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/home/imtuser/Documents/Dragon-core/core/ex_stage.sv:247]
 	Parameter CVA6Cfg[NrCommitPorts] bound to: 1 - type: integer 
 	Parameter CVA6Cfg[AxiAddrWidth] bound to: 64 - type: integer 
 	Parameter CVA6Cfg[AxiDataWidth] bound to: 64 - type: integer 
@@ -8186,18 +8187,18 @@ INFO: [Synth 8-226] default block is never used [/home/imtuser/Documents/Dragon-
 	Parameter FairArb bound to: 1'b1 
 	Parameter IdxWidth bound to: 32'b00000000000000000000000000000001 
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 2497.488 ; gain = 377.992 ; free physical = 569 ; free virtual = 36923
+Finished RTL Elaboration : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 2497.488 ; gain = 377.992 ; free physical = 551 ; free virtual = 33625
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2507.395 ; gain = 387.898 ; free physical = 625 ; free virtual = 36980
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2506.395 ; gain = 386.898 ; free physical = 607 ; free virtual = 33681
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2507.395 ; gain = 387.898 ; free physical = 625 ; free virtual = 36980
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 2506.395 ; gain = 386.898 ; free physical = 607 ; free virtual = 33681
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2507.395 ; gain = 0.000 ; free physical = 512 ; free virtual = 36867
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 2506.395 ; gain = 0.000 ; free physical = 502 ; free virtual = 33576
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -8230,22 +8231,22 @@ Parsing XDC File [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.r
 Finished Parsing XDC File [/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2771.848 ; gain = 0.000 ; free physical = 270 ; free virtual = 36628
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2768.816 ; gain = 0.000 ; free physical = 256 ; free virtual = 33335
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.21 ; elapsed = 00:00:00.21 . Memory (MB): peak = 2771.848 ; gain = 0.000 ; free physical = 270 ; free virtual = 36628
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.20 ; elapsed = 00:00:00.21 . Memory (MB): peak = 2768.816 ; gain = 0.000 ; free physical = 256 ; free virtual = 33335
 WARNING: [Timing 38-316] Clock period '100.000' specified during out-of-context synthesis of instance 'i_axi_dwidth_converter_dm_master' at clock pin 's_axi_aclk' is different from the actual clock period '20.000', this can lead to different synthesis results.
 WARNING: [Timing 38-316] Clock period '100.000' specified during out-of-context synthesis of instance 'i_axi_dwidth_converter_dm_slave' at clock pin 's_axi_aclk' is different from the actual clock period '20.000', this can lead to different synthesis results.
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 2784.723 ; gain = 665.227 ; free physical = 566 ; free virtual = 36923
+Finished Constraint Validation : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 2784.691 ; gain = 665.195 ; free physical = 561 ; free virtual = 33640
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 2788.641 ; gain = 669.145 ; free physical = 563 ; free virtual = 36921
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 2788.609 ; gain = 669.113 ; free physical = 559 ; free virtual = 33639
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -8257,7 +8258,7 @@ Applied set_property DONT_TOUCH = true for i_axi_dwidth_converter_dm_slave. (con
 Applied set_property DONT_TOUCH = true for i_xlnx_blk_mem_gen. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for i_xlnx_clk_gen. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 2788.641 ; gain = 669.145 ; free physical = 559 ; free virtual = 36916
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 2788.609 ; gain = 669.113 ; free physical = 557 ; free virtual = 33638
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'r_state_q_reg' in module 'axi_atop_filter'
 INFO: [Synth 8-802] inferred FSM for state register 'w_state_q_reg' in module 'axi_atop_filter'
@@ -8591,7 +8592,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'w_state_q_reg' using encod
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'r_state_q_reg' using encoding 'sequential' in module 'axi_riscv_lrsc'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:20 ; elapsed = 00:01:39 . Memory (MB): peak = 2788.641 ; gain = 669.145 ; free physical = 190 ; free virtual = 33617
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:21 ; elapsed = 00:01:39 . Memory (MB): peak = 2788.609 ; gain = 669.113 ; free physical = 147 ; free virtual = 30323
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -8731,7 +8732,7 @@ Detailed RTL Component Info :
 	   3 Input    8 Bit        Muxes := 2     
 	   4 Input    8 Bit        Muxes := 6     
 	  12 Input    8 Bit        Muxes := 1     
-	  11 Input    8 Bit        Muxes := 1     
+	  20 Input    8 Bit        Muxes := 1     
 	   5 Input    8 Bit        Muxes := 2     
 	   9 Input    8 Bit        Muxes := 2     
 	  20 Input    7 Bit        Muxes := 1     
@@ -8762,7 +8763,7 @@ Detailed RTL Component Info :
 	   9 Input    4 Bit        Muxes := 5     
 	  23 Input    4 Bit        Muxes := 1     
 	  11 Input    4 Bit        Muxes := 1     
-	  20 Input    4 Bit        Muxes := 2     
+	  20 Input    4 Bit        Muxes := 1     
 	  46 Input    4 Bit        Muxes := 3     
 	   2 Input    3 Bit        Muxes := 414   
 	   5 Input    3 Bit        Muxes := 15    
@@ -8795,8 +8796,8 @@ Detailed RTL Component Info :
 	   5 Input    1 Bit        Muxes := 44    
 	  12 Input    1 Bit        Muxes := 55    
 	  15 Input    1 Bit        Muxes := 1     
-	   8 Input    1 Bit        Muxes := 34    
-	   9 Input    1 Bit        Muxes := 19    
+	   8 Input    1 Bit        Muxes := 29    
+	   9 Input    1 Bit        Muxes := 25    
 	  52 Input    1 Bit        Muxes := 6     
 	  63 Input    1 Bit        Muxes := 1     
 	  14 Input    1 Bit        Muxes := 2     
@@ -9375,7 +9376,7 @@ INFO: [Synth 8-7067] Removed DRAM instance i_axi2apb_64_32_uart/slave_r_buffer_i
 INFO: [Synth 8-7067] Removed DRAM instance i_axi2apb_64_32_uart/slave_r_buffer_i//slave_r_buffer_i/i_axi_single_slice/i_fifo/impl/i_fifo_v3/gen_fpga_queue.fifo_ram/mem_reg_0_1_60_65 from module axi2apb_64_32 due to constant propagation
 INFO: [Synth 8-7066] Removed 6 DRAM instances from module axi2apb_64_32 due to constant propagation
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:39 ; elapsed = 00:04:47 . Memory (MB): peak = 2788.645 ; gain = 669.148 ; free physical = 429 ; free virtual = 33151
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:37 ; elapsed = 00:04:46 . Memory (MB): peak = 2788.613 ; gain = 669.117 ; free physical = 417 ; free virtual = 29910
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -9472,13 +9473,13 @@ Finished ROM, RAM, DSP and Shift Register Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:48 ; elapsed = 00:04:57 . Memory (MB): peak = 2788.645 ; gain = 669.148 ; free physical = 261 ; free virtual = 33047
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:45 ; elapsed = 00:04:55 . Memory (MB): peak = 2788.613 ; gain = 669.117 ; free physical = 221 ; free virtual = 29786
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:04:27 ; elapsed = 00:05:37 . Memory (MB): peak = 2788.645 ; gain = 669.148 ; free physical = 195 ; free virtual = 32993
+Finished Timing Optimization : Time (s): cpu = 00:04:25 ; elapsed = 00:05:36 . Memory (MB): peak = 2788.613 ; gain = 669.117 ; free physical = 172 ; free virtual = 29742
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -10531,7 +10532,7 @@ INFO: [Synth 8-5816] Retiming module `cva6_zybo_z7_20' done
 
 
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:04:57 ; elapsed = 00:06:22 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 508 ; free virtual = 32192
+Finished Technology Mapping : Time (s): cpu = 00:04:55 ; elapsed = 00:06:21 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 523 ; free virtual = 28994
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -10575,37 +10576,37 @@ INFO: [Synth 8-4649] Removing BlackBox instance \i_ariane/i_cva6/i_frontend/i_in
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:05:05 ; elapsed = 00:06:31 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 484 ; free virtual = 32209
+Finished IO Insertion : Time (s): cpu = 00:05:03 ; elapsed = 00:06:29 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 465 ; free virtual = 28979
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:05:05 ; elapsed = 00:06:31 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 484 ; free virtual = 32209
+Finished Renaming Generated Instances : Time (s): cpu = 00:05:03 ; elapsed = 00:06:29 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 465 ; free virtual = 28979
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:05:11 ; elapsed = 00:06:37 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 483 ; free virtual = 32209
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:05:10 ; elapsed = 00:06:36 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 458 ; free virtual = 28974
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:05:11 ; elapsed = 00:06:37 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 483 ; free virtual = 32209
+Finished Renaming Generated Ports : Time (s): cpu = 00:05:10 ; elapsed = 00:06:36 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 458 ; free virtual = 28974
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:05:12 ; elapsed = 00:06:38 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 483 ; free virtual = 32209
+Finished Handling Custom Attributes : Time (s): cpu = 00:05:11 ; elapsed = 00:06:37 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 458 ; free virtual = 28974
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:05:12 ; elapsed = 00:06:38 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 483 ; free virtual = 32209
+Finished Renaming Generated Nets : Time (s): cpu = 00:05:11 ; elapsed = 00:06:37 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 458 ; free virtual = 28974
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -10632,14 +10633,14 @@ Report Cell Usage:
 |5     |BUFG                                |     1|
 |6     |CARRY4                              |  1114|
 |7     |DSP48E1                             |     4|
-|9     |LUT1                                |   161|
-|10    |LUT2                                |  3304|
-|11    |LUT3                                |  3672|
-|12    |LUT4                                |  2544|
-|13    |LUT5                                |  4784|
-|14    |LUT6                                |  8484|
-|15    |MUXF7                               |   395|
-|16    |MUXF8                               |    52|
+|9     |LUT1                                |   157|
+|10    |LUT2                                |  3303|
+|11    |LUT3                                |  3674|
+|12    |LUT4                                |  2541|
+|13    |LUT5                                |  4787|
+|14    |LUT6                                |  8508|
+|15    |MUXF7                               |   386|
+|16    |MUXF8                               |    51|
 |17    |RAM128X1D                           |     3|
 |18    |RAM16X1D                            |     6|
 |19    |RAM32M                              |   184|
@@ -10653,18 +10654,18 @@ Report Cell Usage:
 |29    |OBUF                                |     2|
 +------+------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:05:12 ; elapsed = 00:06:38 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 483 ; free virtual = 32209
+Finished Writing Synthesis Report : Time (s): cpu = 00:05:11 ; elapsed = 00:06:37 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 458 ; free virtual = 28974
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 583 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:05:03 ; elapsed = 00:06:29 . Memory (MB): peak = 2796.648 ; gain = 399.824 ; free physical = 4984 ; free virtual = 36773
-Synthesis Optimization Complete : Time (s): cpu = 00:05:18 ; elapsed = 00:06:41 . Memory (MB): peak = 2796.648 ; gain = 677.152 ; free physical = 4984 ; free virtual = 36760
+Synthesis Optimization Runtime : Time (s): cpu = 00:05:01 ; elapsed = 00:06:29 . Memory (MB): peak = 2796.617 ; gain = 398.824 ; free physical = 4752 ; free virtual = 33563
+Synthesis Optimization Complete : Time (s): cpu = 00:05:16 ; elapsed = 00:06:41 . Memory (MB): peak = 2796.617 ; gain = 677.121 ; free physical = 4757 ; free virtual = 33556
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00.52 ; elapsed = 00:00:00.52 . Memory (MB): peak = 2796.648 ; gain = 0.000 ; free physical = 4967 ; free virtual = 36745
-INFO: [Netlist 29-17] Analyzing 1809 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00.49 ; elapsed = 00:00:00.50 . Memory (MB): peak = 2796.617 ; gain = 0.000 ; free physical = 4718 ; free virtual = 33518
+INFO: [Netlist 29-17] Analyzing 1799 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 1 inverter(s) to 32 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2808.734 ; gain = 0.000 ; free physical = 4909 ; free virtual = 36690
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2808.703 ; gain = 0.000 ; free physical = 4656 ; free virtual = 33466
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 225 instances were transformed.
   LD => LDCE (inverted pins: G): 32 instances
@@ -10673,10 +10674,10 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 184 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-785 Infos, 402 Warnings, 0 Critical Warnings and 0 Errors encountered.
+786 Infos, 402 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:05:29 ; elapsed = 00:06:55 . Memory (MB): peak = 2808.734 ; gain = 689.238 ; free physical = 5071 ; free virtual = 36852
+synth_design: Time (s): cpu = 00:05:27 ; elapsed = 00:06:55 . Memory (MB): peak = 2808.703 ; gain = 689.207 ; free physical = 4807 ; free virtual = 33622
 INFO: [Common 17-1381] The checkpoint '/home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.runs/synth_1/cva6_zybo_z7_20.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 2840.750 ; gain = 32.016 ; free physical = 5065 ; free virtual = 36857
+write_checkpoint: Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 2840.719 ; gain = 32.016 ; free physical = 4816 ; free virtual = 33641
 INFO: [runtcl-4] Executing : report_utilization -file cva6_zybo_z7_20_utilization_synth.rpt -pb cva6_zybo_z7_20_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu May  9 18:21:46 2024...
+INFO: [Common 17-206] Exiting Vivado at Mon May 13 21:53:08 2024...

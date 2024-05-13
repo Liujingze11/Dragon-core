@@ -125,17 +125,6 @@ module decoder
 
     if (~ex_i.valid) begin
       case (instr.rtype.opcode)
-        // ---------------------------------
-        // Dragon Core : Custom Instructions
-        // ---------------------------------
-        riscv::OpcodeCustom0: begin
-          instruction_o.fu = VALU;
-          instruction_o.op = VCONV;
-          instruction_o.rs2[4:0] = instr.rtype.rs2; 
-          instruction_o.rs1[4:0] = instr.rtype.rs1;
-          instruction_o.rd[4:0] = instr.rtype.rd;
-        end
-
         riscv::OpcodeSystem: begin
           instruction_o.fu = CSR;
           instruction_o.rs1[4:0] = instr.itype.rs1;
@@ -273,6 +262,25 @@ module decoder
             3'b001: instruction_o.op = ariane_pkg::FENCE_I;
 
             default: illegal_instr = 1'b1;
+          endcase
+        end
+
+        // ---------------------------------
+        // Dragon Core : Custom Instructions
+        // ---------------------------------
+        riscv::OpcodeCustom0: begin
+          instruction_o.fu = ariane_pkg::VALU;
+          instruction_o.rs1[4:0] = instr.rtype.rs1;
+          instruction_o.rs2[4:0] = instr.rtype.rs2;
+          instruction_o.rd[4:0]  = instr.rtype.rd;
+
+          unique case ({
+            instr.rtype.funct7, instr.rtype.funct3
+          })
+            {7'b000_0000, 3'b000} : instruction_o.op = ariane_pkg::VCONV;
+            default: begin
+              illegal_instr_non_bm = 1'b1;
+            end
           endcase
         end
 

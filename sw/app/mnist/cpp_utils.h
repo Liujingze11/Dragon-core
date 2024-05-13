@@ -33,7 +33,7 @@ do { printf("%s\n", std::string(msg).c_str()); abort(); } while (false)
 #define N2D2_THROW_OR_ABORT(ex, msg) throw ex(msg)
 #endif
 #define N2D2_ALWAYS_INLINE __attribute__((always_inline))
-// 声明一个函数，用于读取环境数据
+
 void envRead(unsigned int size,
              unsigned int channelsHeight,
              unsigned int channelsWidth,

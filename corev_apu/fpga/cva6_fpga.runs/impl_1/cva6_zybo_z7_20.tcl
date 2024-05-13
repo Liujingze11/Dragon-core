@@ -127,7 +127,7 @@ set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
   set_param chipscope.maxJobs 1
-  set_param synth.incrementalSynthesisCache ./.Xil/Vivado-20110-EQI07359/incrSyn
+  set_param synth.incrementalSynthesisCache ./.Xil/Vivado-192383-EQI07359/incrSyn
   open_checkpoint cva6_zybo_z7_20_routed.dcp
   set_property webtalk.parent_dir /home/imtuser/Documents/Dragon-core/corev_apu/fpga/cva6_fpga.cache/wt [current_project]
 set_property TOP cva6_zybo_z7_20 [current_fileset]

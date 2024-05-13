@@ -98,7 +98,6 @@ module issue_stage
     input  logic               valu_ready_i,
     output logic               valu_valid_o
 );
-
   // ---------------------------------------------------
   // Scoreboard (SB) <-> Issue and Read Operands (IRO)
   // ---------------------------------------------------

@@ -83,8 +83,8 @@ module issue_read_operands
     // input  scoreboard_entry     commit_instr_i,
     // output logic                commit_ack_o
 
-    // Dragon Core : VALU ready/valid
-    input logic valu_ready_i,
+    // Dragon Core
+    input  logic valu_ready_i,
     output logic valu_valid_o
 );
   logic stall;
@@ -140,7 +140,6 @@ module issue_read_operands
   assign cvxif_off_instr_o   = CVA6Cfg.CvxifEn ? cvxif_off_instr_q : '0;
   assign stall_issue_o       = stall;
   assign valu_valid_o        = valu_valid_q; //Dragon Core : enable control for the vector alu unit
-
   // ---------------
   // Issue Stage
   // ---------------
@@ -300,6 +299,7 @@ module issue_read_operands
       fpu_rm_q       <= 3'b0;
       csr_valid_q    <= 1'b0;
       branch_valid_q <= 1'b0;
+      valu_valid_q   <= 1'b0; // Dragon Core
     end else begin
       alu_valid_q    <= 1'b0;
       lsu_valid_q    <= 1'b0;
@@ -309,6 +309,7 @@ module issue_read_operands
       fpu_rm_q       <= 3'b0;
       csr_valid_q    <= 1'b0;
       branch_valid_q <= 1'b0;
+      valu_valid_q   <= 1'b0; // Dragon Core
       // Exception pass through:
       // If an exception has occurred simply pass it through
       // we do not want to issue this instruction
@@ -343,6 +344,9 @@ module issue_read_operands
           CSR: begin
             csr_valid_q <= 1'b1;
           end
+          VALU: begin
+            valu_valid_q <= 1'b1; // Dragon Core
+          end
           default: ;
         endcase
       end
@@ -355,6 +359,7 @@ module issue_read_operands
         fpu_valid_q    <= 1'b0;
         csr_valid_q    <= 1'b0;
         branch_valid_q <= 1'b0;
+        valu_valid_q   <= 1'b0; // Dragon Core
       end
     end
   end
@@ -383,21 +388,6 @@ module issue_read_operands
       end
     end
   end
-
-  //Dragon Core
-  always_ff @(posedge clk_i or negedge rst_ni) begin
-      if (!rst_ni) begin
-        valu_valid_q <= 1'b0;
-      end else begin
-        valu_valid_q <= 1'b0;
-        if (!issue_instr_i.ex.valid && issue_instr_valid_i && issue_ack_o) begin
-            valu_valid_q <= 1'b1;
-        end
-        if (flush_i) begin         
-          valu_valid_q <= 1'b0;
-        end
-      end
-    end
 
   // We can issue an instruction if we do not detect that any other instruction is writing the same
   // destination register.
